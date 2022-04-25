@@ -4,27 +4,27 @@ import AxiosServ from "./axios.service";
 class HttpRequestService {
   constructor() {}
 
-  // layDanhSachPhim = () => {
-  //   const uri = "/api/QuanLyPhim/LayDanhSachPhim";
-  //   return AxiosServ.getMethod(uri, false);
-  // };
+  layDanhSachViTri = () => {
+    const uri = "/api/locations";
+    return AxiosServ.getMethod(uri, false);
+  };
 
   // dangNhap = (data) => {
   //   const uri = "/api/QuanLyNguoiDung/DangNhap";
   //   return AxiosServ.postMethod(uri, data);
   // };
 
-  layDanhSachPhim = () => {
-    const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
+  // layDanhSachPhim = () => {
+  //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
 
-    return AxiosServ.getMethod(uri);
-  };
+  //   return AxiosServ.getMethod(uri);
+  // };
 
-  layThongTinNguoiDung = (data) => {
-    const uri = "/api/QuanLyNguoiDung/ThongTinTaiKhoan";
+  // layThongTinNguoiDung = (data) => {
+  //   const uri = "/api/QuanLyNguoiDung/ThongTinTaiKhoan";
 
-    return AxiosServ.postMethod(uri, data);
-  };
+  //   return AxiosServ.postMethod(uri, data);
+  // };
 }
 
 const httpServ = new HttpRequestService();

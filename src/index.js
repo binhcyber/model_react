@@ -8,7 +8,6 @@ import { rootReducer } from "./redux/reducer/rootReducer";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 // import store from "./redux/store";
-// import { Provider } from "react-redux";
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const store = createStore(
   rootReducer,

@@ -44,6 +44,8 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      display: ["group-focus"],
+    },
   },
 };
