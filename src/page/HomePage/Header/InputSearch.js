@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { AutoComplete, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 
 export default function InputSearch({ dsViTri }) {
-  console.log(dsViTri);
   const cloneDsViTri = dsViTri.map((vitri) => {
     return { value: vitri.province, id: vitri._id };
   });
@@ -19,10 +18,12 @@ export default function InputSearch({ dsViTri }) {
             style={{
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <span>
-              <NavLink to={`/room/${vitri._id}`}>{vitri.province}</NavLink>
+            <NavLink to={`/room/${vitri._id}`}>{vitri.province} </NavLink>
+            <span className="ml-auto">
+              <EnvironmentOutlined />
             </span>
           </div>
         ),
@@ -42,20 +43,25 @@ export default function InputSearch({ dsViTri }) {
       dropdownMatchSelectWidth={252}
       style={{
         width: 300,
+        borderColor: "transparent",
       }}
       filterOption={(inputValue, option) =>
         option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
       dropdownStyle={{
         maxHeight: "190px",
-        overflowY: "scroll",
         maxWidth: "200px",
       }}
       options={(options, lists)}
       onSelect={onSelect}
       onSearch={handleSearch}
     >
-      <Input.Search size="large" placeholder="input here" enterButton />
+      <Input.Search
+        size="large"
+        placeholder="Where are you going?"
+        className="hover:border-transparent"
+        enterButton
+      />
     </AutoComplete>
   );
 }

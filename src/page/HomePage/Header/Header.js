@@ -10,7 +10,7 @@ export default function Header() {
   const { dsViTri } = useSelector((state) => {
     return state.layDSViTriReducer;
   });
-  console.log(dsViTri);
+
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
       {/* logo */}

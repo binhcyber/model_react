@@ -1,0 +1,35 @@
+
+/* CSS input search navbar */
+.ant-input{
+    border:none!important;
+}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button{
+    color: red!important;
+    border-color: transparent!important;
+    background-color: white!important;
+    box-shadow: none!important;
+
+}
+.ant-input:focus{
+    box-shadow: none;
+}
+.ant-btn-primary:hover{
+    background: none!important;
+}
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector{
+    border-color: transparent!important;
+    border-right-width: none!important;
+}
+a{
+    color: black!important;
+    font-weight: 400!important;
+    font-size: 16px;
+
+}
+/* Css slick (home detail component) */
+.slick-dots li button:before{
+    font-size: 16px!important;
+}
+.slick-dots li.slick-active button:before{
+    color: orange!important;
+}

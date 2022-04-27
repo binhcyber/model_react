@@ -6,7 +6,11 @@ class HttpRequestService {
 
   layDanhSachViTri = () => {
     const uri = "/api/locations";
-    return AxiosServ.getMethod(uri, false);
+    return AxiosServ.getMethod(uri);
+  };
+  layDanhSachPhong = () => {
+    const uri = `/api/rooms/`;
+    return AxiosServ.getMethod(uri);
   };
 
   // dangNhap = (data) => {
