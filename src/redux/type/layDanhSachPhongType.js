@@ -1,1 +1,2 @@
 export const SET_LIST_ROOM = "SET_LIST_ROOM";
+export const SET_UTILITIES_ROOM = "SET_UTILITIES_ROO";
