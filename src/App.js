@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import DetailRoom from "./page/DetailRoom/DetailRoom";
-import Test from "./page/DetailRoom/test";
-import test from "./page/DetailRoom/test";
 import HomeDetail from "./page/HomePage/HomeDetail/HomeDetail";
 import Layout from "./template/Layout";
+import ListRoom from "./page/ListRoom/ListRoom";
+import DetailRoom from "./page/DetailRoom/DetailRoom";
 function App() {
   return (
     <BrowserRouter>
@@ -15,9 +14,15 @@ function App() {
             return <Layout Component={HomeDetail} />;
           }}
         />
-        <Route path={"/test"} exact component={Test} />
         <Route
-          path="/room/:id"
+          path="/room/"
+          exact
+          render={() => {
+            return <Layout Component={ListRoom} />;
+          }}
+        />
+        <Route
+          path="/detailroom/:id"
           exact
           render={() => {
             return <Layout Component={DetailRoom} />;

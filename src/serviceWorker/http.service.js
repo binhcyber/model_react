@@ -12,7 +12,10 @@ class HttpRequestService {
     const uri = `/api/rooms/`;
     return AxiosServ.getMethod(uri);
   };
-
+  layChiTietPhong = (id) => {
+    const uri = `api/rooms/${id}`;
+    return AxiosServ.getMethod(uri);
+  };
   // dangNhap = (data) => {
   //   const uri = "/api/QuanLyNguoiDung/DangNhap";
   //   return AxiosServ.postMethod(uri, data);
