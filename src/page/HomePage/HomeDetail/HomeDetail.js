@@ -18,7 +18,7 @@ export default function HomeDetail() {
   });
   console.log(dsViTri);
   var settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 4,
@@ -55,7 +55,7 @@ export default function HomeDetail() {
     return dsViTri?.map((vitri, index) => {
       return (
         <div key={index} className="space-x-1 rounded-md">
-          <NavLink to={`/room/${vitri._id}`}>
+          <NavLink to={"/room"}>
             <Card
               key={index}
               hoverable

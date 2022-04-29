@@ -96,7 +96,7 @@ export default function Header() {
             <div className="inline relative">
               <button
                 type="button"
-                className="inline-flex items-center relative px-2 border rounded-full hover:shadow-lg"
+                className="inline-flex group items-center relative px-2 border rounded-full hover:shadow-lg"
               >
                 <div className="pl-1">
                   <svg
@@ -138,6 +138,18 @@ export default function Header() {
                   >
                     <path d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z" />
                   </svg>
+                </div>
+                <div className="absolute top-11 right-0 z-10 group-focus:block block rounded-lg shadow-xl h-72 w-64 bg-white p-5">
+                  <p className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0">
+                    Đăng Ký
+                  </p>
+                  <p className="font-medium text-left text-base hover:bg-gray-100 rounded-md py-1 m-0">
+                    Đăng Nhập
+                  </p>
+                  <hr />
+                  <p className="text-left text-base hover:bg-gray-100 rounded-md py-1 m-0 ">
+                    Contact
+                  </p>
                 </div>
               </button>
             </div>

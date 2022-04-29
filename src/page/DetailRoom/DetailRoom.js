@@ -7,6 +7,17 @@ import { Select } from "antd";
 import { WifiOutlined, StarOutlined } from "@ant-design/icons";
 const { Option, OptGroup } = Select;
 import { Progress } from "antd";
+import UserComment from "./UserComment";
+import {
+  MdElevator,
+  MdPool,
+  MdFireplace,
+  MdKitchen,
+  MdCable,
+} from "react-icons/md/index";
+import { FaHotTub, FaHandsWash } from "react-icons/fa/index";
+import { CgGym } from "react-icons/cg/index";
+import { GiFire } from "react-icons/gi/index";
 export default function DetailRoom() {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { id } = useParams();
@@ -80,51 +91,91 @@ export default function DetailRoom() {
       </div>
       <div className="grid grid-cols-2">
         <div>
-          <h1>Nơi này có những gì cho bạn</h1>
+          <h1 className="text-2xl">Nơi này có những gì cho bạn</h1>
           <div className="grid grid-cols-2">
             <div className=" justify-start items-center flex flex-row space-x-2 space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <WifiOutlined className="text-2xl" />
+              {chiTietPhong?.wifi ? (
+                <p className="m-0 text-xl">Wifi</p>
+              ) : (
+                <del className="m-0 text-xl">Wifi</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <MdFireplace className="text-2xl" />
+              {chiTietPhong?.indoorFireplace ? (
+                <p className="m-0 text-xl">IndoorFirePlace</p>
+              ) : (
+                <del className="m-0 text-xl">IndoorFirePlace</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <MdElevator className="text-2xl" />
+              {chiTietPhong?.elevator ? (
+                <p className="m-0 text-xl">Thang Máy</p>
+              ) : (
+                <del className="m-0 text-xl">Thang Máy</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <FaHotTub className="text-2xl" />
+              {chiTietPhong?.hotTub ? (
+                <p className="m-0 text-xl">Hot Tub</p>
+              ) : (
+                <del className="m-0 text-xl">Hot Tub</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <MdPool className="text-2xl" />
+              {chiTietPhong?.pool ? (
+                <p className="m-0 text-xl">Pool</p>
+              ) : (
+                <del className="m-0 text-xl">Pool</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <FaHandsWash className="text-2xl" />
+              {chiTietPhong?.dryer ? (
+                <p className="m-0 text-xl">Dryer</p>
+              ) : (
+                <del className="m-0 text-xl">Dryer</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <CgGym className="text-2xl" />
+              {chiTietPhong?.gym ? (
+                <p className="m-0 text-xl">Gym</p>
+              ) : (
+                <del className="m-0 text-xl">Gym</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <MdKitchen className="text-2xl" />
+              {chiTietPhong?.kitchen ? (
+                <p className="m-0 text-xl">Kitchen</p>
+              ) : (
+                <del className="m-0 text-xl">Kitchen</del>
+              )}
             </div>
             <div className="justify-start items-center flex flex-row space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <GiFire className="text-2xl" />
+              {chiTietPhong?.heating ? (
+                <p className="m-0 text-xl">Heading</p>
+              ) : (
+                <del className="m-0 text-xl">Heading</del>
+              )}
             </div>
             <div className="items-center flex flex-row justify-start space-x-2">
-              <WifiOutlined />
-              <p className="m-0">Wifi</p>
+              <MdCable className="text-2xl" />
+              {chiTietPhong?.cableTV ? (
+                <p className="m-0 text-xl">CableTV</p>
+              ) : (
+                <del className="m-0 text-xl">CableTV</del>
+              )}
             </div>
           </div>
         </div>
-        <div className="w-370 h-460 rounded-md shadow-md p-4">
+        <div className="w-370 h-460 rounded-lg shadow-lg p-4">
           <div>
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row">
@@ -176,10 +227,10 @@ export default function DetailRoom() {
           </div>
         </div>
       </div>
-      <div>
-        <div className="flex flex-row justify-center items-center">
-          <StarOutlined />
-          <span>8 - đánh giá</span>
+      <div className="mt-10">
+        <div className="flex flex-row justify-start items-center">
+          <StarOutlined className="text-red-500 text-lg mb-1 mr-1" />
+          <span className=" text-lg font-bold">5 - đánh giá</span>
         </div>
         <div className="grid grid-cols-2 gap-6 ">
           <div className="justify-start items-center flex flex-row space-x-2 mr-10 ">
@@ -207,6 +258,53 @@ export default function DetailRoom() {
             <Progress percent={80} size="small" className="flex-grow" />
           </div>
         </div>
+      </div>
+      <div className="flex mx-auto items-center justify-center shadow-lg mt-10 ">
+        <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <h2 className="px-4 pt-3 pb-2 text-gray-800 text-lg">
+              Add a new comment
+            </h2>
+            <div className="w-full md:w-full px-3 mb-2 mt-2">
+              <textarea
+                className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                name="body"
+                placeholder="Type Your Comment"
+                required
+                defaultValue={""}
+              />
+            </div>
+            <div className="w-full md:w-full flex items-start md:w-full px-3">
+              <div className="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
+                <svg
+                  fill="none"
+                  className="w-5 h-5 text-gray-600 mr-1"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <p className="text-xs md:text-sm pt-px">Some HTML is okay.</p>
+              </div>
+              <div className="-mr-1">
+                <input
+                  type="submit"
+                  className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+                  defaultValue="Post Comment"
+                />
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="grid grid-col-2 gap-10">
+        <UserComment></UserComment>
+        <UserComment></UserComment>
       </div>
     </div>
   );
