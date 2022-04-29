@@ -21,7 +21,7 @@ export default function InputSearch({ dsViTri }) {
               alignItems: "center",
             }}
           >
-            <NavLink to={`/room/${vitri._id}`}>{vitri.province} </NavLink>
+            <NavLink to="/room">{vitri.province} </NavLink>
             <span className="ml-auto">
               <EnvironmentOutlined />
             </span>

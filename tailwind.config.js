@@ -16,8 +16,10 @@ module.exports = {
       borderColor: {},
       height: {
         84: "336px",
+        460: "460px",
       },
       width: {
+        370: "370px",
         22: "88px",
       },
       maxHeight: {
