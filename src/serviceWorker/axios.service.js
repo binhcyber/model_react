@@ -17,7 +17,6 @@ class AxiosService {
     });
     this.getAxiosConfig();
   }
-
   getBaseUrl() {
     return DOMAIN;
   }
@@ -30,7 +29,7 @@ class AxiosService {
     this.axiosConfig = {
       headers: {
         tokenByClass: TOKEN_CYBERSOFT,
-        Authorization: "bearer " + localStorageServ.userInfor.get().accessToken,
+        // Authorization: "bearer " + localStorageServ.userInfor.get().accessToken,
       },
     };
   };

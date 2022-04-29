@@ -16,10 +16,14 @@ class HttpRequestService {
     const uri = `api/rooms/${id}`;
     return AxiosServ.getMethod(uri);
   };
-  // dangNhap = (data) => {
-  //   const uri = "/api/QuanLyNguoiDung/DangNhap";
-  //   return AxiosServ.postMethod(uri, data);
-  // };
+  dangNhap = (data) => {
+    const uri = "/api/auth/login";
+    return AxiosServ.postMethod(uri, data);
+  };
+  dangKy = (data) => {
+    const uri = "/api/auth/register";
+    return AxiosServ.postMethod(uri, data);
+  };
 
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
