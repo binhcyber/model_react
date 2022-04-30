@@ -7,7 +7,6 @@ import Login from "./component/Login/Login";
 import Register from "./component/Register/Register";
 import { createBrowserHistory } from "history";
 export let history = createBrowserHistory();
-
 function App() {
   return (
     <BrowserRouter>

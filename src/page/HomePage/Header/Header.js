@@ -1,6 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { layDSViTriAction } from "../../../redux/action/layDanhSachViTriAction";
+import { REMOVE_LOCAL } from "../../../redux/type/localStorageType";
+import httpServ from "../../../serviceWorker/http.service";
+import localStorageServ from "../../../serviceWorker/locaStorage.service";
 import InputSearch from "./InputSearch";
 export default function Header() {
   const dispatch = useDispatch();
@@ -13,7 +17,12 @@ export default function Header() {
   const { dangNhap, dangKy } = useSelector((state) => {
     return state.localStorageReducer;
   });
-
+  // console.log({ dangKy });
+  const handleRemoveLocal = () => {
+    dispatch({
+      type: REMOVE_LOCAL,
+    });
+  };
   return (
     <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
       {/* logo */}
@@ -128,10 +137,10 @@ export default function Header() {
                   </svg>
                 </div>
                 <div className="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">
-                  {dangKy || dangNhap ? (
+                  {dangNhap ? (
                     <img
                       src="http://picsum.photos/50/50"
-                      className="rounded-full"
+                      className="rounded-full mt-1"
                     />
                   ) : (
                     <svg
@@ -151,11 +160,11 @@ export default function Header() {
                     </svg>
                   )}
                 </div>
-                <div className="absolute top-11 right-0 z-10 group-focus:block block rounded-lg shadow-xl h-72 w-64 bg-white p-5">
-                  {dangKy || dangNhap ? (
+                <div className="absolute top-11 right-0 z-10 group-focus:block hidden rounded-lg shadow-xl h-72 w-64 bg-white p-5">
+                  {dangNhap ? (
                     <>
                       <p className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0">
-                        Chào
+                        Chào {dangNhap.name}
                       </p>
                       <p className="font-medium text-left text-base hover:bg-gray-100 rounded-md py-1 m-0">
                         Contact
@@ -164,17 +173,20 @@ export default function Header() {
                       <p className="text-left text-base hover:bg-gray-100 rounded-md py-1 m-0 ">
                         Thông tin cá nhân
                       </p>
-                      <p className="text-left text-base hover:bg-gray-100 rounded-md py-1 m-0 ">
+                      <p
+                        onClick={handleRemoveLocal}
+                        className="text-center  text-base hover:bg-gray-100 rounded-md py-1 m-3 "
+                      >
                         Đăng Xuất
                       </p>
                     </>
                   ) : (
                     <>
                       <p className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0">
-                        Đăng Ký
+                        <NavLink to={"/register"}>Đăng Ký</NavLink>
                       </p>
                       <p className="font-medium text-left text-base hover:bg-gray-100 rounded-md py-1 m-0">
-                        Đăng Nhập
+                        <NavLink to={"/login"}>Đăng Nhập</NavLink>
                       </p>
                       <hr />
                       <p className="text-left text-base hover:bg-gray-100 rounded-md py-1 m-0 ">

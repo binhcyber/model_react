@@ -7,18 +7,21 @@ export const dangNhapAction = (data) => {
     httpServ
       .dangNhap(data)
       .then((res) => {
-        console.log(res.data.user);
-        dispatch({
-          type: DANG_NHAP_TYPE,
-          payload: res.data.user,
-        });
-        setTimeout(() => {
-          message.success("Đăng Ký Thàng công");
-          history.goBack();
-        }, [2000]);
+        console.log(res);
+        if (res.status === 200) {
+          dispatch({
+            type: DANG_NHAP_TYPE,
+            payload: res.data.user,
+          });
+          setTimeout(() => {
+            history.goBack();
+            message.success("Đăng Ký Thàng công");
+          }, [3000]);
+        }
       })
       .catch((err) => {
         console.log(err);
+        message.error("Mật khẩu hoặc email không đúng");
       });
   };
 };

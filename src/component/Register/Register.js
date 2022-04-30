@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 import { dangKyAction } from "../../redux/action/dangKyAction";
-// import { DatePicker, Space } from "antd";
+import { DatePicker, Space } from "antd";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -41,7 +41,8 @@ export default function Register() {
       onSubmit={(values) => {
         // same shape as initial values
         // let data = { ...values, maNhom: "GP01" };
-        // console.log(values);
+
+        console.log(values);
         dispatch(dangKyAction(values));
       }}
     >

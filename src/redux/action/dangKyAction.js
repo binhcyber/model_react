@@ -7,7 +7,7 @@ export const dangKyAction = (data) => {
     httpServ
       .dangKy(data)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         dispatch({
           type: DANG_KY_TYPE,
           payload: res.data,
