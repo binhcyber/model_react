@@ -160,7 +160,7 @@ export default function Header() {
                     </svg>
                   )}
                 </div>
-                <div className="absolute top-11 right-0 z-10 group-focus:block hidden rounded-lg shadow-xl h-72 w-64 bg-white p-5">
+                <div className="absolute top-11 right-0 z-10 group-focus:block block rounded-lg shadow-xl h-72 w-64 bg-white p-5">
                   {dangNhap ? (
                     <>
                       <p className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0">

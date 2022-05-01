@@ -19,7 +19,7 @@ function App() {
           }}
         />
         <Route
-          path="/room/"
+          path="/room"
           exact
           render={() => {
             return <Layout Component={ListRoom} />;
@@ -33,7 +33,7 @@ function App() {
           }}
         />
         <Route path="/login" exact component={Login} />
-        <Route path={"/register"} exact component={Register} />
+        <Route path="/register" exact component={Register} />
       </Switch>
     </BrowserRouter>
   );

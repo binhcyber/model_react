@@ -33,7 +33,6 @@ class LocalStorageService extends LocalStorageKey {
    */
 
   accessToken = new BaseStorage(this.ACCESS_TOKEN);
-
   userInfor = new BaseStorage(this.USER_INFOR);
 }
 

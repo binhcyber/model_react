@@ -24,6 +24,10 @@ class HttpRequestService {
     const uri = "/api/auth/register";
     return AxiosServ.postMethod(uri, data);
   };
+  datPhong = (data) => {
+    const uri = "api/rooms/booking";
+    return AxiosServ.postMethod(uri, data);
+  };
 
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";

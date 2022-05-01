@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Redirect, useHistory, useParams } from "react-router-dom";
 import { layChiTietPhongAction } from "../../redux/action/layChiTietPhongAction";
 import { Modal, Button } from "antd";
 import { Select } from "antd";
@@ -18,18 +18,29 @@ import {
 import { FaHotTub, FaHandsWash } from "react-icons/fa/index";
 import { CgGym } from "react-icons/cg/index";
 import { GiFire } from "react-icons/gi/index";
+import { DatePicker, Space } from "antd";
+import moment from "moment";
+import { datPhongAction } from "../../redux/action/datPhongAction";
+import localStorageServ from "../../serviceWorker/locaStorage.service";
 export default function DetailRoom() {
+  const { chiTietPhong } = useSelector((state) => {
+    return state.layChiTietPhongReducer;
+  });
+  const priceRoomday = chiTietPhong?.price;
+  console.log(priceRoomday);
+  const [priceRoom, setPriceRoom] = useState(0);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [allowCheckIn, setAllowCheckIn] = useState(false);
+  const [allowCheckOut, setAllowCheckOut] = useState(false);
+  const [numDay, setNumDay] = useState();
   const { id } = useParams();
+  const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(layChiTietPhongAction(id));
   }, []);
-  const { chiTietPhong } = useSelector((state) => {
-    return state.layChiTietPhongReducer;
-  });
-  console.log(chiTietPhong);
-
   const showModal = () => {
     setIsModalVisible(true);
   };
@@ -42,6 +53,48 @@ export default function DetailRoom() {
   function handleChange(value) {
     console.log(`selected ${value}`);
   }
+
+  function handleCheckIn(value, checkIn) {
+    // console.log("CheckIn Time: ", value);
+    console.log("CheckIn Selected Time: ", checkIn);
+    setCheckInDate(checkIn);
+    setAllowCheckIn(true);
+  }
+  function handleCheckOut(value, checkOut) {
+    // console.log("CheckOut Time: ", value);
+    console.log("CheckOut Selected Time: ", checkOut);
+    setCheckOutDate(checkOut);
+    setAllowCheckOut(true);
+    // let day1 = new Date(checkInDate);
+    // let day2 = new Date(checkOutDate);
+    // console.log(day1);
+    // let difference = Math.abs(day2 - day1);
+    // console.log(typeof difference);
+    // let numDateStays = difference / (1000 * 3600 * 24);
+    // console.log(numDateStays);
+    // let tongTien = numDateStays * priceRoomday;
+    // setPriceRoom(tongTien);
+    // console.log(priceRoom);
+  }
+  const datPhong = () => {
+    let day1 = new Date(checkInDate);
+    let day2 = new Date(checkOutDate);
+    let difference = Math.abs(day2 - day1);
+    let numDateStays = difference / (1000 * 3600 * 24);
+    setNumDay(numDateStays);
+    let tongTien = numDateStays * priceRoomday;
+    setPriceRoom(tongTien);
+    let infoRoom = {
+      roomId: id,
+      checkIn: checkInDate,
+      checkOut: checkOutDate,
+    };
+    if (localStorageServ.userInfor.get()) {
+      dispatch(datPhongAction(infoRoom));
+    } else {
+      history.push("/login");
+    }
+  };
   return (
     <div className="container mx-auto ">
       <div className="flex flex-row items-center justify-center ">
@@ -85,8 +138,18 @@ export default function DetailRoom() {
                 Tiện nghi khách có quyền sử dụng:
               </h3>
               <p>Tất cả</p>
+              <h3 className="text-xl font-bold">Giá Phòng</h3>
+              <div className="flex flex-row justify-between items-center">
+                <p className="text-lg text-red-500">
+                  {priceRoomday?.toLocaleString()} VND
+                </p>
+                <p className="text-lg">/day</p>
+              </div>
             </Modal>
           </>
+          <h1 className="text-xl text-green-500 mt-3">
+            Price: {priceRoomday?.toLocaleString()} VND/day
+          </h1>
         </div>
       </div>
       <div className="grid grid-cols-2">
@@ -179,8 +242,8 @@ export default function DetailRoom() {
           <div>
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row">
-                <h3>$15/</h3>
-                <span>đêm</span>
+                <h3>{priceRoom.toLocaleString()} VND/</h3>
+                <span>{numDay} days</span>
               </div>
               <div className="flex flex-row justify-center items-center">
                 <StarOutlined />
@@ -188,6 +251,20 @@ export default function DetailRoom() {
               </div>
             </div>
             <div>
+              <div className="flex flex-row items-center">
+                <Space direction="vertical" size={12}>
+                  <DatePicker
+                    onChange={handleCheckIn}
+                    placeholder={"Check in"}
+                  />
+                </Space>
+                <Space direction="vertical" size={12}>
+                  <DatePicker
+                    onChange={handleCheckOut}
+                    placeholder={"Check out"}
+                  />
+                </Space>
+              </div>
               <Select
                 defaultValue="lucy"
                 style={{ width: "100%", margin: "10px 0 10px 0" }}
@@ -201,15 +278,30 @@ export default function DetailRoom() {
                   <Option value="Yiminghe">yiminghe</Option>
                 </OptGroup>
               </Select>
-              <div className="focus:outline-none text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-4 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-full">
-                <button className="font-bold text-lg" type="button">
-                  Đặt Phòng
-                </button>
-              </div>
+              {allowCheckIn && allowCheckOut ? (
+                <div
+                  onClick={datPhong}
+                  className="focus:outline-none cursor-pointer  text-center text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-4 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-full"
+                >
+                  <button className="font-bold text-lg" type="button">
+                    Đặt Phòng
+                  </button>
+                </div>
+              ) : (
+                <div className="focus:outline-none bg-gray-500 opacity-75 text-center text-white cursor-not-allowed hover:bg-gray-400 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-4 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 w-full">
+                  <button
+                    disabled
+                    className="font-bold text-lg cursor-not-allowed"
+                    type="button"
+                  >
+                    Đặt Phòng
+                  </button>
+                </div>
+              )}
               <div>
                 <div className="flex flex-row justify-between items-center">
-                  <p>$15 x 1 đêm</p>
-                  <p>$15</p>
+                  <p>{priceRoom.toLocaleString()} VND x day</p>
+                  <p>{priceRoom.toLocaleString()} VND</p>
                 </div>
               </div>
               <div>
@@ -221,7 +313,9 @@ export default function DetailRoom() {
               <hr />
               <div className="flex flex-row justify-between items-center">
                 <p className="text-xl font-bold">Tổng trước thuế</p>
-                <p className="text-xl font-bold">$15</p>
+                <p className="text-xl font-bold">
+                  {priceRoom.toLocaleString()} VND
+                </p>
               </div>
             </div>
           </div>

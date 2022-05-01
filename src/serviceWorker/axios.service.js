@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { store } from "../index";
-import { DOMAIN, TOKEN_CYBERSOFT } from "../configURL/constant";
+import { DOMAIN, TOKEN_ADMIN, TOKEN_CYBERSOFT } from "../configURL/constant";
 // import {
 //   set_spinner_end,
 //   set_spinner_start,
@@ -30,6 +30,8 @@ class AxiosService {
       headers: {
         tokenByClass: TOKEN_CYBERSOFT,
         // Authorization: "bearer " + localStorageServ.userInfor.get().accessToken,
+        // token:
+        token: TOKEN_ADMIN,
       },
     };
   };
