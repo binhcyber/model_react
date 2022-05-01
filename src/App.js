@@ -6,6 +6,7 @@ import DetailRoom from "./page/DetailRoom/DetailRoom";
 import Login from "./component/Login/Login";
 import Register from "./component/Register/Register";
 import { createBrowserHistory } from "history";
+import UserInfor from "./page/UserInfor/UserInfor";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -30,6 +31,13 @@ function App() {
           exact
           render={() => {
             return <Layout Component={DetailRoom} />;
+          }}
+        />
+        <Route
+          path="/user"
+          exact
+          render={() => {
+            return <Layout Component={UserInfor} />;
           }}
         />
         <Route path="/login" exact component={Login} />
