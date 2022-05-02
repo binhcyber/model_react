@@ -96,7 +96,7 @@ export default function DetailRoom() {
     }
   };
   return (
-    <div className="container mx-auto ">
+    <div className="lg:container md:container lg:mx-auto md:mx-auto lg:mt-24 md:mt-24 mt-24 ml-5">
       <div className="flex flex-row items-center justify-center ">
         <div className="flex flex-col justify-center items-center">
           <h1>{chiTietPhong?.name}</h1>
@@ -152,7 +152,7 @@ export default function DetailRoom() {
           </h1>
         </div>
       </div>
-      <div className="grid grid-cols-2">
+      <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1">
         <div>
           <h1 className="text-2xl">Nơi này có những gì cho bạn</h1>
           <div className="grid grid-cols-2">
@@ -238,7 +238,7 @@ export default function DetailRoom() {
             </div>
           </div>
         </div>
-        <div className="w-370 h-460 rounded-lg shadow-lg p-4">
+        <div className="w-327 h-460 rounded-lg shadow-lg p-4">
           <div>
             <div className="flex flex-row justify-between items-center">
               <div className="flex flex-row">

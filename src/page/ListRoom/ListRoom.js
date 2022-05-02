@@ -125,7 +125,7 @@ export default function ListRoom() {
     });
   };
   return (
-    <div>
+    <div className="mt-24">
       <div>
         <button
           type="button"
@@ -185,8 +185,8 @@ export default function ListRoom() {
         </button>
       </div>
       {dsPhongUtilities === null ? (
-        <div>
-          <div className="grid grid-cols-2 gap-2 container mx-auto p-0">
+        <div className="container mx-auto space-y-8">
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 lg:gap-2 grid-cols-1 container mx-auto p-0">
             {dsPhong &&
               dsPhong.length > 0 &&
               dsPhong
@@ -195,7 +195,7 @@ export default function ListRoom() {
                   return (
                     <NavLink
                       key={phong._id}
-                      style={{ minWidth: "576px", maxHeight: "200px" }}
+                      // style={{ minWidth: "576px", maxHeight: "200px" }}
                       to={`/detailroom/${phong._id}`}
                       className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                     >
@@ -237,8 +237,8 @@ export default function ListRoom() {
           />
         </div>
       ) : (
-        <div>
-          <div className="grid grid-cols-2 gap-2 container mx-auto p-0">
+        <div className="container mx-auto space-y-8">
+          <div className="grid lg:grid-cols-2 lg:gap-2 md:grid-cols-1 grid-cols-1 container mx-auto p-0">
             {dsPhongUtilities &&
               dsPhongUtilities.length > 0 &&
               dsPhongUtilities
@@ -247,7 +247,7 @@ export default function ListRoom() {
                   return (
                     <NavLink
                       key={phong._id}
-                      style={{ minWidth: "576px", maxHeight: "200px" }}
+                      // style={{ minWidth: "576px", maxHeight: "200px" }}
                       to={`/detailroom/${phong._id}`}
                       className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
                     >

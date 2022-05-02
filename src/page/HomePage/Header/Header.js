@@ -25,7 +25,7 @@ export default function Header() {
     });
   };
   return (
-    <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20 fixed z-10 shadow-md">
+    <nav className=" bg-white w-full flex justify-between items-center mx-auto px-8 h-20 fixed top-0 right-0 left-0 z-20 shadow-md">
       {/* logo */}
       <div className="inline-flex">
         <NavLink className="_o6689fn" to="/">
@@ -53,7 +53,7 @@ export default function Header() {
       </div>
       {/* end logo */}
       {/* search bar */}
-      <div className="hidden sm:block flex-shrink flex-grow-0 justify-start px-2">
+      <div className="block sm:block flex-shrink flex-grow-0 justify-start px-2">
         <div className="inline-block">
           <div className="inline-flex items-center max-w-full">
             <button
@@ -69,7 +69,7 @@ export default function Header() {
       {/* login */}
       <div className="flex-initial">
         <div className="flex justify-end items-center relative">
-          <div className="flex mr-4 items-center">
+          <div className="flex mr-4 hidden items-center lg:flex md:flex sm:hidden ">
             <a
               className="inline-block py-2 px-3 hover:bg-gray-200 rounded-full"
               href="#"

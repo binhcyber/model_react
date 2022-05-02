@@ -8,6 +8,7 @@ const { Meta } = Card;
 import { layDSViTriAction } from "../../../redux/action/layDanhSachViTriAction";
 import { NavLink } from "react-router-dom";
 import "../../PageCss/Page.css";
+
 export default function HomeDetail() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -30,6 +31,17 @@ export default function HomeDetail() {
       {
         breakpoint: 1024,
         settings: {
+          dots: false,
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          dots: false,
           slidesToShow: 3,
           slidesToScroll: 3,
           infinite: true,
@@ -39,6 +51,7 @@ export default function HomeDetail() {
       {
         breakpoint: 600,
         settings: {
+          dots: false,
           slidesToShow: 2,
           slidesToScroll: 2,
           initialSlide: 2,
@@ -47,6 +60,7 @@ export default function HomeDetail() {
       {
         breakpoint: 480,
         settings: {
+          dots: false,
           slidesToShow: 1,
           slidesToScroll: 1,
         },
@@ -89,16 +103,13 @@ export default function HomeDetail() {
     });
   };
   return (
-    <div className="mt-5">
+    <div className="mt-24">
       <div className="relative container mx-auto ">
         <img
           src="https://picsum.photos/1200/600"
           className=" object-cover object-center rounded-xl mx-auto"
         />
-        <div
-          style={{ bottom: "120px", left: "300px" }}
-          className="absolute text-4xl z-10 text-white font-medium "
-        >
+        <div className="absolute homeDetail left-28 bottom-5 md:text-3xl md:bottom-32 md:left-48 lg:text-4xl lg:bottom-32 lg:left-80 z-10 text-white font-medium ">
           Hãy để trí tò mò của bạn dẫn lối
         </div>
       </div>
@@ -113,10 +124,7 @@ export default function HomeDetail() {
               src="https://picsum.photos/580/700"
               className="object-cover object-center rounded-xl text-center z-10"
             />
-            <div
-              style={{ top: "20px", left: "20px" }}
-              className="absolute text-4xl font-medium text-white"
-            >
+            <div className="absolute text-lg top-5 left-5 md:top-5 md:left-5 md:text-4xl lg:top-5 lg:left-5 lg:text-4xl font-medium text-white">
               Những điều nên trải nghiệm trong chuyến đi của bạn
             </div>
           </div>
@@ -125,10 +133,7 @@ export default function HomeDetail() {
               src="https://picsum.photos/580/700"
               className="object-cover object-center rounded-xl"
             />
-            <div
-              style={{ top: "20px", left: "20px" }}
-              className="absolute text-4xl font-medium text-white"
-            >
+            <div className="absolute text-lg top-5 left-5 md:top-5 md:left-5 md:text-4xl lg:top-5 lg:left-5 lg:text-4xl font-medium text-white">
               Những điều nên trải nghiệm tại nhà
             </div>
           </div>
@@ -139,10 +144,7 @@ export default function HomeDetail() {
           src="https://picsum.photos/1380/680"
           className="object-cover object-center mx-auto"
         />
-        <div
-          className="absolute text-6xl font-medium text-white"
-          style={{ top: "40px", left: "60px" }}
-        >
+        <div className="absolute text-2xl top-10 left-16 lg:top-10 md:top-10 md:left-16 lg:left-16 md:text-6xl lg:text-6xl font-medium text-white">
           Bạn có thắc mắc về việc đón tiếp khách?
         </div>
       </div>
