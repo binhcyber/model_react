@@ -25,7 +25,7 @@ export default function Header() {
     });
   };
   return (
-    <nav className=" bg-white w-full flex justify-between items-center mx-auto px-8 h-20 fixed top-0 right-0 left-0 z-20 shadow-md">
+    <nav className=" bg-white w-full flex justify-between items-center mx-auto lg:px-8 md:px-8 px-1 h-20 fixed top-0 right-0 left-0 z-20 shadow-md">
       {/* logo */}
       <div className="inline-flex">
         <NavLink className="_o6689fn" to="/">

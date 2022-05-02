@@ -6,7 +6,7 @@ export default function UserInfor() {
     return state.localStorageReducer;
   });
   return (
-    <div className="grid grid-cols-2 container mx-auto ">
+    <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 container mx-auto mt-24 ">
       <div className="border-1 hover:shadow-lg p-3 w-80 rounded-lg">
         <img
           className="mx-auto rounded-full my-3"

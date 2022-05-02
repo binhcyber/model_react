@@ -6,6 +6,10 @@ import { DOMAIN, TOKEN_ADMIN, TOKEN_CYBERSOFT } from "../configURL/constant";
 //   set_spinner_start,
 // } from "../redux/action/spinnerAction";
 import localStorageServ from "./locaStorage.service";
+import {
+  set_loading_end,
+  set_loading_start,
+} from "../redux/action/loadingAction";
 
 class AxiosService {
   axios;
@@ -75,11 +79,11 @@ class AxiosService {
   }
 
   handleFlow(method, loading = true) {
-    // store.dispatch(set_spinner_start());
+    store.dispatch(set_loading_start());
     return new Promise((resolve, reject) => {
       method
         .then((res) => {
-          // store.dispatch(set_spinner_end());
+          store.dispatch(set_loading_end());
           resolve({
             data: res.data,
             status: res.status,
@@ -87,7 +91,7 @@ class AxiosService {
           });
         })
         .catch((err) => {
-          // store.dispatch(set_spinner_end());
+          store.dispatch(set_loading_end());
           this.handleError(err);
           reject({
             err: err,
