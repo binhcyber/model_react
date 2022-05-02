@@ -25,7 +25,7 @@ export default function Header() {
     });
   };
   return (
-    <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20">
+    <nav className=" bg-white w-full flex relative justify-between items-center mx-auto px-8 h-20 fixed z-10 shadow-md">
       {/* logo */}
       <div className="inline-flex">
         <NavLink className="_o6689fn" to="/">
@@ -195,7 +195,6 @@ export default function Header() {
                         className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0"
                       >
                         Đăng Ký
-                        {/* <NavLink to={"/register"}>Đăng Ký</NavLink> */}
                       </p>
                       <p
                         onClick={() => {
