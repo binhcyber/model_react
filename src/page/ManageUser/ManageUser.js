@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { layDSNguoiDungAction } from "../../redux/action/layDSNguoiDung";
+import { xoaNguoiDungAction } from "../../redux/action/CRUDNguoiDungAction";
 import moment from "moment";
 import { AiFillEdit } from "react-icons/ai/index";
 import { BsFillTrashFill } from "react-icons/bs/index";
 import { Modal, Button } from "antd";
 import { Input, Space } from "antd";
-
+import ModalThemUser from "./ModalThemUser";
 export default function ManageUser() {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -76,7 +77,12 @@ export default function ManageUser() {
                 )}
               </td>
               <td className="px-6 py-4 flex flex-row justify-between items-center">
-                <BsFillTrashFill className="font-medium text-lg text-red-600 dark:text-blue-500 cursor-pointer" />
+                <BsFillTrashFill
+                  onClick={() => {
+                    dispatch(xoaNguoiDungAction(user._id));
+                  }}
+                  className="font-medium text-lg text-red-600 dark:text-blue-500 cursor-pointer"
+                />
                 <AiFillEdit className="font-medium text-lg text-blue-600 dark:text-blue-500 cursor-pointer" />
               </td>
             </tr>
@@ -86,20 +92,8 @@ export default function ManageUser() {
   };
   return (
     <div className="container mx-auto mt-24">
-      <div className="py-5">
-        <Button type="primary" onClick={showModal}>
-          Thêm Quản trị viên
-        </Button>
-        <Modal
-          title="Thêm Quản trị viên"
-          visible={isModalVisible}
-          onOk={handleOk}
-          onCancel={handleCancel}
-        >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Modal>
+      <div>
+        <ModalThemUser />
       </div>
       <form className="mb-5">
         <label

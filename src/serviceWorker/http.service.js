@@ -32,6 +32,14 @@ class HttpRequestService {
     const uri = `/api/users/pagination?skip=${minItem}&limit=${maxItem}`;
     return AxiosServ.getMethod(uri);
   };
+  themNguoiDung = (data) => {
+    const uri = "/api/users";
+    return AxiosServ.postMethod(uri, data);
+  };
+  xoaNguoiDung = (id) => {
+    const uri = `/api/users/${id}`;
+    return AxiosServ.deleteMothod(uri);
+  };
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
 
