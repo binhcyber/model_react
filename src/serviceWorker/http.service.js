@@ -28,7 +28,10 @@ class HttpRequestService {
     const uri = "api/rooms/booking";
     return AxiosServ.postMethod(uri, data);
   };
-
+  layDSNguoiDung = (minItem, maxItem) => {
+    const uri = `/api/users/pagination?skip=${minItem}&limit=${maxItem}`;
+    return AxiosServ.getMethod(uri);
+  };
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
 

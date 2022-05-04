@@ -121,7 +121,7 @@ export default function HomeDetail() {
         <div className="grid grid-cols-2 gap-4">
           <div className="relative">
             <img
-              src="https://picsum.photos/580/700"
+              src="https://picsum.photos/581/700"
               className="object-cover object-center rounded-xl text-center z-10"
             />
             <div className="absolute text-lg top-5 left-5 md:top-5 md:left-5 md:text-4xl lg:top-5 lg:left-5 lg:text-4xl font-medium text-white">

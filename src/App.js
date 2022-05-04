@@ -9,6 +9,8 @@ import { createBrowserHistory } from "history";
 import UserInfor from "./page/UserInfor/UserInfor";
 import NotFoundPages from "./page/NotFound/NotFoundPages";
 import Loading from "./component/Loading/Loading";
+import NotFoundLayout from "./template/NotFoundLayout";
+import ManageUser from "./page/ManageUser/ManageUser";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -44,15 +46,17 @@ function App() {
               return <Layout Component={UserInfor} />;
             }}
           />
-          <Route
-            path="*"
+          {/* <Route
+            path={"*"}
             exact
             render={() => {
-              return <Layout Component={NotFoundPages} />;
+              return <NotFoundLayout Component={NotFoundPages} />;
             }}
-          />
+          /> */}
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
+          <Route path="/admin" exact component={ManageUser} />
+          <Route path="*" exact component={NotFoundPages} />
         </Switch>
       </BrowserRouter>
     </>
