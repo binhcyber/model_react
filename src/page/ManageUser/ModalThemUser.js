@@ -10,14 +10,17 @@ import { themNguoiDungAction } from "../../redux/action/CRUDNguoiDungAction";
 export default function ModalThemUser() {
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [form] = Form.useForm();
   const showModal = () => {
     setIsModalVisible(true);
   };
   const handleOk = () => {
     setIsModalVisible(false);
+    form.resetFields();
   };
   const handleCancel = () => {
     setIsModalVisible(false);
+    form.resetFields();
   };
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -34,7 +37,7 @@ export default function ModalThemUser() {
   return (
     <div>
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        Thêm Quản trị viên
       </Button>
       <Modal
         title="Basic Modal"
@@ -46,9 +49,10 @@ export default function ModalThemUser() {
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          initialValues={{ remember: true }}
+          initialValues={{ remember: false }}
           onFinish={onFinish}
           autoComplete="off"
+          form={form}
         >
           <Form.Item
             label="User name"
@@ -121,7 +125,14 @@ export default function ModalThemUser() {
             <Input.Password />
           </Form.Item>
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              onClick={() => {
+                // form.resetFields();
+                // setIsModalVisible(false);
+              }}
+              type="primary"
+              htmlType="submit"
+            >
               Submit
             </Button>
           </Form.Item>

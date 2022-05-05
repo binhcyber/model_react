@@ -1,7 +1,9 @@
 import React from "react";
 import { AiOutlineCheck, AiFillStar } from "react-icons/ai";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 export default function UserInfor() {
+  const history = useHistory();
   const { dangNhap } = useSelector((state) => {
     return state.localStorageReducer;
   });
@@ -15,8 +17,13 @@ export default function UserInfor() {
         <div className="text-center">
           <h3>Xác minh danh tính</h3>
           <p>Xác thực danh tính của bạn với huy hiệu xác minh danh tính.</p>
-          <button className="p-3 border-2 rounded-lg border-black text-md my-3">
-            Nhận danh hiệu
+          <button
+            onClick={() => {
+              history.push("/adminPriority");
+            }}
+            className="p-3 border-2 rounded-lg border-black text-md my-3"
+          >
+            Quản lý Admin
           </button>
           <h3>{dangNhap?.name} đã xác nhận:</h3>
           <p className="flex flex-row justify-center items-center">

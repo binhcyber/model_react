@@ -33,7 +33,8 @@ class AxiosService {
     this.axiosConfig = {
       headers: {
         tokenByClass: TOKEN_CYBERSOFT,
-        // Authorization: "bearer " + localStorageServ.userInfor.get().accessToken,
+        Authorization:
+          "bearer " + localStorageServ.userInfor.get()?.accessToken,
         // token:
         token: TOKEN_ADMIN,
       },
@@ -106,7 +107,7 @@ class AxiosService {
       // case 400:
       case 401:
       case 403:
-      // window.location.assign("/login");
+        window.location.assign("/login");
       //   break;
       // default:
       //   break;

@@ -38,7 +38,7 @@ export default function EditUser() {
   };
 
   return (
-    <div>
+    <div className="bg-gray-300">
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -47,6 +47,7 @@ export default function EditUser() {
         onFinish={onFinish}
         autoComplete="off"
         form={form}
+        className="w-1/2 bg-white mx-auto py-4 pr-24"
       >
         <Form.Item label="ID" name="_id" hasFeedback>
           <Input disabled={true} />
@@ -110,7 +111,7 @@ export default function EditUser() {
         >
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item wrapperCol={{ offset: 12, span: 12 }}>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

@@ -2,6 +2,7 @@ import httpServ from "../../serviceWorker/http.service";
 import { DANG_NHAP_TYPE } from "../type/localStorageType";
 import { history } from "../../App";
 import { message, Button, Space } from "antd";
+import { Redirect } from "react-router-dom";
 export const dangNhapAction = (data) => {
   return (dispatch) => {
     httpServ
@@ -14,8 +15,9 @@ export const dangNhapAction = (data) => {
             payload: res.data.user,
           });
           setTimeout(() => {
-            history.goBack();
-            message.success("Đăng Ký Thàng công");
+            message.success("Đăng Ký Thành công");
+            window.location.assign("/");
+            // <Redirect to="/" />;
           }, [3000]);
         }
       })

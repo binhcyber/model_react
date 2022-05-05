@@ -167,8 +167,13 @@ export default function Header() {
                       <p className="font-medium text-left text-base hover:bg-gray-100 py-1 rounded-md m-0">
                         Chào {dangNhap.name}
                       </p>
-                      <p className="font-medium text-left text-base hover:bg-gray-100 rounded-md py-1 m-0">
-                        Contact
+                      <p
+                        onClick={() => {
+                          history.push("/adminPriority");
+                        }}
+                        className="font-medium text-left text-base hover:bg-gray-100 rounded-md py-1 m-0"
+                      >
+                        Quản lý admin
                       </p>
                       <hr />
                       <p

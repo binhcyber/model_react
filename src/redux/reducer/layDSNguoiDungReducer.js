@@ -2,6 +2,7 @@ import { SET_USER_PAGINATE } from "../type/layDSNguoiDungType";
 import {
   CAP_NHAT_NGUOI_DUNG,
   EDIT_NGUOI_DUNG,
+  SEARCH_NGUOI_DUNG,
   THEM_NGUOI_DUNG,
   XOA_NGUOI_DUNG,
 } from "../type/CRUDNguoiDungType";
@@ -29,7 +30,7 @@ export const dsNguoiDungPhanTrangReducer = (state = initialState, action) => {
       console.log(action.payload);
       const dsPhongPhanTrangUpdate = [...state.dsPhongPhanTrang];
       let index = dsPhongPhanTrangUpdate.findIndex((item) => {
-        return (item._id = action.payload);
+        return item._id === action.payload._id;
       });
       if (index !== -1) {
         dsPhongPhanTrangUpdate.splice(index, 1);
@@ -54,6 +55,21 @@ export const dsNguoiDungPhanTrangReducer = (state = initialState, action) => {
         dsPhongPhanTrangUpdate[index] = userUpdate;
       }
       state.dsPhongPhanTrang = dsPhongPhanTrangUpdate;
+      return { ...state };
+    }
+    case SEARCH_NGUOI_DUNG: {
+      let userCanTim = action.payload;
+      console.log(userCanTim);
+      const dsPhongPhanTrangUpdate = [...state.dsPhongPhanTrang];
+      console.log(dsPhongPhanTrangUpdate);
+      let searchResult = dsPhongPhanTrangUpdate.filter((item) => {
+        console.log(item.name.trim().toUpperCase());
+        return (
+          item.name.trim().toUpperCase() === userCanTim.trim().toUpperCase()
+        );
+      });
+      console.log(searchResult);
+      state.dsPhongPhanTrang = searchResult;
       return { ...state };
     }
     default:

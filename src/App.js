@@ -12,6 +12,8 @@ import Loading from "./component/Loading/Loading";
 import NotFoundLayout from "./template/NotFoundLayout";
 import ManageUser from "./page/ManageUser/ManageUser";
 import EditUser from "./page/ManageUser/EditUser";
+import SecureView from "./HOC/SecureView";
+import AdminPriority from "./page/AdminPriority/AdminPriority";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -58,6 +60,7 @@ function App() {
           <Route path="/register" exact component={Register} />
           <Route path="/admin" exact component={ManageUser} />
           <Route path="/edituser" exact component={EditUser} />
+          <Route path="/adminPriority" exact component={AdminPriority} />
           <Route path="*" exact component={NotFoundPages} />
         </Switch>
       </BrowserRouter>
