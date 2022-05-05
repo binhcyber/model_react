@@ -31,9 +31,6 @@ export default function ModalThemUser() {
     console.log(data);
     dispatch(themNguoiDungAction(data));
   };
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   return (
     <div>
       <Button type="primary" onClick={showModal}>
@@ -51,7 +48,6 @@ export default function ModalThemUser() {
           wrapperCol={{ span: 16 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

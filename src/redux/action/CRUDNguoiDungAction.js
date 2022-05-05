@@ -1,6 +1,11 @@
 import { message } from "antd";
+import { history } from "../../App";
 import httpServ from "../../serviceWorker/http.service";
-import { THEM_NGUOI_DUNG, XOA_NGUOI_DUNG } from "../type/CRUDNguoiDungType";
+import {
+  CAP_NHAT_NGUOI_DUNG,
+  THEM_NGUOI_DUNG,
+  XOA_NGUOI_DUNG,
+} from "../type/CRUDNguoiDungType";
 export const themNguoiDungAction = (data) => {
   return (dispatch) => {
     httpServ
@@ -29,6 +34,28 @@ export const xoaNguoiDungAction = (id) => {
           payload: res.data,
         });
         message.success("XÓA NGƯỜI DÙNG THÀNH CÔNG");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+export const capNhatNguoiDungAction = (id, data) => {
+  return (dispatch) => {
+    httpServ
+      .capNhatNguoiDung(id, data)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          dispatch({
+            type: CAP_NHAT_NGUOI_DUNG,
+            payload: res.data,
+          });
+          setTimeout(() => {
+            message.success("CẬP NHẬT NGƯỜI DÙNG THÀNH CÔNG");
+            history.goBack();
+          }, [2000]);
+        }
       })
       .catch((err) => {
         console.log(err);

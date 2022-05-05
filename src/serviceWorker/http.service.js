@@ -40,6 +40,10 @@ class HttpRequestService {
     const uri = `/api/users/${id}`;
     return AxiosServ.deleteMothod(uri);
   };
+  capNhatNguoiDung = (id, data) => {
+    const uri = `/api/users/${id}`;
+    return AxiosServ.putMethod(uri, data);
+  };
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
 

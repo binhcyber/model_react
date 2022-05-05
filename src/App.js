@@ -11,6 +11,7 @@ import NotFoundPages from "./page/NotFound/NotFoundPages";
 import Loading from "./component/Loading/Loading";
 import NotFoundLayout from "./template/NotFoundLayout";
 import ManageUser from "./page/ManageUser/ManageUser";
+import EditUser from "./page/ManageUser/EditUser";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
           <Route path="/admin" exact component={ManageUser} />
+          <Route path="/edituser" exact component={EditUser} />
           <Route path="*" exact component={NotFoundPages} />
         </Switch>
       </BrowserRouter>

@@ -9,8 +9,11 @@ import { BsFillTrashFill } from "react-icons/bs/index";
 import { Modal, Button } from "antd";
 import { Input, Space } from "antd";
 import ModalThemUser from "./ModalThemUser";
+import { EDIT_NGUOI_DUNG } from "../../redux/type/CRUDNguoiDungType";
+import { useHistory } from "react-router-dom";
 export default function ManageUser() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const { dsPhongPhanTrang } = useSelector((state) => {
     return state.dsNguoiDungPhanTrangReducer;
@@ -83,7 +86,16 @@ export default function ManageUser() {
                   }}
                   className="font-medium text-lg text-red-600 dark:text-blue-500 cursor-pointer"
                 />
-                <AiFillEdit className="font-medium text-lg text-blue-600 dark:text-blue-500 cursor-pointer" />
+                <AiFillEdit
+                  onClick={() => {
+                    dispatch({
+                      type: EDIT_NGUOI_DUNG,
+                      payload: user,
+                    });
+                    history.push("/edituser");
+                  }}
+                  className="font-medium text-lg text-blue-600 dark:text-blue-500 cursor-pointer"
+                />
               </td>
             </tr>
           );
