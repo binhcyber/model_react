@@ -14,6 +14,9 @@ import ManageUser from "./page/ManageUser/ManageUser";
 import EditUser from "./page/ManageUser/EditUser";
 import SecureView from "./HOC/SecureView";
 import AdminPriority from "./page/AdminPriority/AdminPriority";
+import AdminLayout from "./template/AdminLayout";
+import ManageRoom from "./page/ManageRoom/ManageRoom";
+import ThemRoom from "./page/ManageRoom/ThemRoom";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -58,9 +61,23 @@ function App() {
           /> */}
           <Route path="/login" exact component={Login} />
           <Route path="/register" exact component={Register} />
-          <Route path="/admin" exact component={ManageUser} />
           <Route path="/edituser" exact component={EditUser} />
           <Route path="/adminPriority" exact component={AdminPriority} />
+          <Route
+            path="/admin"
+            exact
+            render={() => {
+              return <AdminLayout Component={ManageUser} />;
+            }}
+          />
+          <Route
+            path="/manageRoom"
+            exact
+            render={() => {
+              return <AdminLayout Component={ManageRoom} />;
+            }}
+          />
+          <Route path="/addRoom" exact component={ThemRoom} />
           <Route path="*" exact component={NotFoundPages} />
         </Switch>
       </BrowserRouter>
