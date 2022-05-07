@@ -5,6 +5,7 @@ import {
   SET_LIST_ROOM,
   SET_THANG_MAY,
   SET_WIFI,
+  UPADTE_IMAGE_ROOM,
   UPADTE_ROOM,
 } from "../type/layDanhSachPhongType";
 const initialState = {
@@ -47,10 +48,23 @@ export const layDSPhongReducer = (state = initialState, action) => {
       state.editPhong = roomUpdate;
       let newDsPhong = [...state.dsPhong];
       let index = newDsPhong.findIndex((item) => {
-        return (item._id = roomUpdate._id);
+        return item._id === roomUpdate._id;
       });
       if (index !== -1) {
         newDsPhong[index] = roomUpdate;
+      }
+      state.dsPhong = newDsPhong;
+      return { ...state };
+    }
+    case UPADTE_IMAGE_ROOM: {
+      let roomImgUpdate = action.payload;
+      console.log(roomImgUpdate);
+      let newDsPhong = [...state.dsPhong];
+      let index = newDsPhong.findIndex((item) => {
+        return item._id === roomImgUpdate._id;
+      });
+      if (index !== -1) {
+        newDsPhong[index] = roomImgUpdate;
       }
       state.dsPhong = newDsPhong;
       return { ...state };

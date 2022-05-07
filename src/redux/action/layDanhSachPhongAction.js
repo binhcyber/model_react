@@ -3,6 +3,7 @@ import {
   CREATE_ROOM,
   DELETE_ROOM,
   SET_LIST_ROOM,
+  UPADTE_IMAGE_ROOM,
   UPADTE_ROOM,
 } from "../type/layDanhSachPhongType";
 import { history } from "../../App";
@@ -81,6 +82,28 @@ export const capNhatPhongAction = (id, data) => {
           setTimeout(() => {
             history.goBack();
             message.success("Cập nhật phòng thành công");
+          }, [3000]);
+        }
+      })
+      .catch((err) => {
+        message.error("Cập nhật phòng không thành công");
+      });
+  };
+};
+export const capNhatHinhAnhPhongAction = (id, data) => {
+  return (dispatch) => {
+    httpServ
+      .capNhatHinhAnhPhong(id, data)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          dispatch({
+            type: UPADTE_IMAGE_ROOM,
+            payload: res.data,
+          });
+          setTimeout(() => {
+            // history.goBack();
+            message.success("Cập nhật hình ảnh phòng thành công");
           }, [3000]);
         }
       })

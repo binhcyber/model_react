@@ -3,6 +3,7 @@ import { Table, Button, Modal } from "antd";
 import { Input, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  capNhatHinhAnhPhongAction,
   layDSPhongAction,
   xoaPhongAction,
 } from "../../redux/action/layDanhSachPhongAction";
@@ -14,6 +15,7 @@ const { Search } = Input;
 
 export default function ManageRoom() {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [imgSrc, setImgSrc] = useState("");
   const { dsPhong } = useSelector((state) => {
     return state.layDSPhongReducer;
   });
@@ -22,6 +24,30 @@ export default function ManageRoom() {
   useEffect(() => {
     dispatch(layDSPhongAction());
   }, []);
+  const handleImg = (e) => {
+    //lấy file ra từ e
+    const file = e.target.files[0];
+    const id = e.target.id;
+    console.log(id);
+    // console.log(file);
+    //Tạo đổi tượng để đọc file
+    if (
+      file.type === "image/jpg" ||
+      file.type === "image/gif" ||
+      file.type === "image/png" ||
+      file.type === "image/jpeg"
+    ) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        console.log(e.target.result);
+        // setImgSrc(e.target.result);
+      };
+      let formData = new FormData();
+      formData.append("room", file, file.name);
+      dispatch(capNhatHinhAnhPhongAction(id, formData));
+    }
+  };
   console.log(dsPhong);
   const columns = [
     {
@@ -53,16 +79,26 @@ export default function ManageRoom() {
       dataIndex: "image",
       render: (text, room, index) => {
         return (
-          <img
-            src={
-              room.image
-                ? room.image
-                : `https://picsum.photos/id/${index}/50/50`
-            }
-            alt={room.image}
-            width="50px"
-            height="50px"
-          />
+          <div>
+            <img
+              src={
+                room.image
+                  ? room.image
+                  : `https://picsum.photos/id/${index}/50/50`
+              }
+              alt={room.image}
+              width="50px"
+              height="50px"
+            />
+            <input
+              id={room._id}
+              className="my-2"
+              type="file"
+              onChange={handleImg}
+              accept="image/jpeg, image/png, image/gif, image/jpg"
+            />
+            {/* <img style={{ width: 50, height: 50 }} src={imgSrc} alt="" /> */}
+          </div>
         );
       },
       width: "10%",

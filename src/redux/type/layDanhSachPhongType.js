@@ -3,6 +3,7 @@ export const CREATE_ROOM = "CREATE_ROOM";
 export const DELETE_ROOM = "DELETE_ROOM";
 export const EDIT_ROOM = "EDIT_ROOM";
 export const UPADTE_ROOM = "UPADTE_ROOM";
+export const UPADTE_IMAGE_ROOM = "UPADTE_IMAGE_ROOM";
 export const SET_WIFI = "SET_WIFI";
 export const SET_THANG_MAY = "SET_THANG_MAY";
 export const SET_HOT_TUB = "SET_HOT_TUB";
