@@ -44,6 +44,18 @@ class HttpRequestService {
     const uri = `/api/users/${id}`;
     return AxiosServ.putMethod(uri, data);
   };
+  taoPhong = (data) => {
+    const uri = "/api/rooms";
+    return AxiosServ.postMethod(uri, data);
+  };
+  xoaPhong = (id) => {
+    const uri = `/api/rooms/${id}`;
+    return AxiosServ.deleteMothod(uri);
+  };
+  capNhatPhong = (id, data) => {
+    const uri = `/api/rooms/${id}`;
+    return AxiosServ.putMethod(uri, data);
+  };
   // layDanhSachPhim = () => {
   //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
 

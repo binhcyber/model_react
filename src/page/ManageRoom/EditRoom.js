@@ -5,11 +5,12 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { capNhatNguoiDungAction } from "../../redux/action/CRUDNguoiDungAction";
 import { useHistory } from "react-router-dom";
-import { taoPhongAction } from "../../redux/action/layDanhSachPhongAction";
-export default function ThemRoom() {
-  const { editUser } = useSelector((state) => {
-    return state.dsNguoiDungPhanTrangReducer;
+import { capNhatPhongAction } from "../../redux/action/layDanhSachPhongAction";
+export default function editRoom() {
+  const { editPhong } = useSelector((state) => {
+    return state.layDSPhongReducer;
   });
+
   const [utilities, setUtilities] = useState({
     elevator: false,
     hotTub: false,
@@ -23,10 +24,25 @@ export default function ThemRoom() {
     heating: false,
     cableTV: false,
   });
+  console.log(utilities);
   const [form] = Form.useForm();
   useEffect(() => {
-    let newUser = { ...editUser };
-    // setUser(newUser);
+    let newUser = { ...editPhong };
+    console.log(newUser);
+    // setUtilities({
+    //   ...utilities,
+    //   elevator: newUser.elevator,
+    //   hotTub: newUser.hotTub,
+    //   pool: newUser.pool,
+    //   hotTub: newUser.hotTub,
+    //   indoorFireplace: newUser.indoorFireplace,
+    //   dryer: newUser.dryer,
+    //   gym: newUser.gym,
+    //   kitchen: newUser.kitchen,
+    //   wifi: newUser.wifi,
+    //   heating: newUser.heating,
+    //   cableTV: newUser.cableTV,
+    // });
     form.setFieldsValue(newUser);
   }, []);
   const dispatch = useDispatch();
@@ -120,15 +136,14 @@ export default function ThemRoom() {
   }
   const onFinish = (values) => {
     console.log("Success:", values);
+    const id = values._id;
     const data = {
       ...values,
       locationId: null,
     };
-    const newData = { ...data, ...utilities };
-    console.log(newData);
-    dispatch(taoPhongAction(newData));
+    console.log(data);
+    dispatch(capNhatPhongAction(id, data));
   };
-
   return (
     <div className="bg-gray-300">
       <Form
@@ -141,6 +156,9 @@ export default function ThemRoom() {
         form={form}
         className="w-1/2 bg-white mx-auto py-4 pr-24"
       >
+        <Form.Item label="ID" name="_id" hasFeedback>
+          <Input disabled />
+        </Form.Item>
         <Form.Item
           label="Tên Phòng"
           name="name"
@@ -207,31 +225,35 @@ export default function ThemRoom() {
         <Form.Item name="elevator" label="elevator" valuePropName="checked">
           <Switch onChange={onChangeElevator} />
         </Form.Item>
-        <Form.Item label="hotTub" valuePropName="checked">
+        <Form.Item name="hotTub" label="hotTub" valuePropName="checked">
           <Switch onChange={onChangeHotTub} />
         </Form.Item>
-        <Form.Item label="pool" valuePropName="checked">
+        <Form.Item name="pool" label="pool" valuePropName="checked">
           <Switch onChange={onChangePool} />
         </Form.Item>
-        <Form.Item label="indoorFireplace" valuePropName="checked">
+        <Form.Item
+          name="indoorFireplace"
+          label="indoorFireplace"
+          valuePropName="checked"
+        >
           <Switch onChange={onChangeIndoorFireplace} />
         </Form.Item>
-        <Form.Item label="dryer" valuePropName="checked">
+        <Form.Item name="dryer" label="dryer" valuePropName="checked">
           <Switch onChange={onChangeDryer} />
         </Form.Item>
-        <Form.Item label="gym" valuePropName="checked">
+        <Form.Item name="gym" label="gym" valuePropName="checked">
           <Switch onChange={onChangeGym} />
         </Form.Item>
-        <Form.Item label="kitchen" valuePropName="checked">
+        <Form.Item name="kitchen" label="kitchen" valuePropName="checked">
           <Switch onChange={onChangeKitchen} />
         </Form.Item>
-        <Form.Item label="wifi" valuePropName="checked">
+        <Form.Item name="wifi" label="wifi" valuePropName="checked">
           <Switch onChange={onChangeWifi} />
         </Form.Item>
-        <Form.Item label="heating" valuePropName="checked">
+        <Form.Item name="heating" label="heating" valuePropName="checked">
           <Switch onChange={onChangeHeating} />
         </Form.Item>
-        <Form.Item label="cableTV" valuePropName="checked">
+        <Form.Item name="cableTV" label="cableTV" valuePropName="checked">
           <Switch onChange={onChangeCableTV} />
         </Form.Item>
         <Form.Item
@@ -243,7 +265,7 @@ export default function ThemRoom() {
         </Form.Item>
         <Form.Item wrapperCol={{ offset: 12, span: 12 }}>
           <Button type="primary" htmlType="submit">
-            Submit
+            Update Room
           </Button>
         </Form.Item>
       </Form>

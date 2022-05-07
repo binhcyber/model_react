@@ -1,5 +1,12 @@
 import httpServ from "../../serviceWorker/http.service";
-import { SET_LIST_ROOM } from "../type/layDanhSachPhongType";
+import {
+  CREATE_ROOM,
+  DELETE_ROOM,
+  SET_LIST_ROOM,
+  UPADTE_ROOM,
+} from "../type/layDanhSachPhongType";
+import { history } from "../../App";
+import { message } from "antd";
 export const layDSPhongAction = () => {
   return (dispatch) => {
     httpServ
@@ -13,6 +20,72 @@ export const layDSPhongAction = () => {
       })
       .catch((err) => {
         console.log(err.data);
+      });
+  };
+};
+
+export const taoPhongAction = (data) => {
+  return (dispatch) => {
+    httpServ
+      .taoPhong(data)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          dispatch({
+            type: CREATE_ROOM,
+            payload: res.data,
+          });
+          setTimeout(() => {
+            history.goBack();
+            message.success("Tạo phòng thành công");
+          }, [3000]);
+        }
+      })
+      .catch((err) => {
+        message.error("Tạo phòng không thành công");
+      });
+  };
+};
+export const xoaPhongAction = (id) => {
+  return (dispatch) => {
+    httpServ
+      .xoaPhong(id)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          dispatch({
+            type: DELETE_ROOM,
+            payload: res.data,
+          });
+          setTimeout(() => {
+            message.success("Xóa phòng thành công");
+          }, [3000]);
+        }
+      })
+      .catch((err) => {
+        message.error("Xóa phòng không thành công");
+      });
+  };
+};
+export const capNhatPhongAction = (id, data) => {
+  return (dispatch) => {
+    httpServ
+      .capNhatPhong(id, data)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          dispatch({
+            type: UPADTE_ROOM,
+            payload: res.data,
+          });
+          setTimeout(() => {
+            history.goBack();
+            message.success("Cập nhật phòng thành công");
+          }, [3000]);
+        }
+      })
+      .catch((err) => {
+        message.error("Cập nhật phòng không thành công");
       });
   };
 };

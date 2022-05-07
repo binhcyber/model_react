@@ -17,6 +17,7 @@ import AdminPriority from "./page/AdminPriority/AdminPriority";
 import AdminLayout from "./template/AdminLayout";
 import ManageRoom from "./page/ManageRoom/ManageRoom";
 import ThemRoom from "./page/ManageRoom/ThemRoom";
+import EditRoom from "./page/ManageRoom/EditRoom";
 export let history = createBrowserHistory();
 function App() {
   return (
@@ -78,6 +79,7 @@ function App() {
             }}
           />
           <Route path="/addRoom" exact component={ThemRoom} />
+          <Route path="/editRoom/:id" exact component={EditRoom} />
           <Route path="*" exact component={NotFoundPages} />
         </Switch>
       </BrowserRouter>

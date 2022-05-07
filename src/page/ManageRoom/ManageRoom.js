@@ -1,14 +1,19 @@
-import React, { useEffect } from "react";
-import { Table } from "antd";
+import React, { useEffect, useState } from "react";
+import { Table, Button, Modal } from "antd";
 import { Input, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { layDSPhongAction } from "../../redux/action/layDanhSachPhongAction";
+import {
+  layDSPhongAction,
+  xoaPhongAction,
+} from "../../redux/action/layDanhSachPhongAction";
 import { AiFillEdit } from "react-icons/ai/index";
 import { BsFillTrashFill } from "react-icons/bs/index";
 import { useHistory } from "react-router-dom";
+import { EDIT_ROOM } from "../../redux/type/layDanhSachPhongType";
 const { Search } = Input;
 
 export default function ManageRoom() {
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const { dsPhong } = useSelector((state) => {
     return state.layDSPhongReducer;
   });
@@ -82,10 +87,33 @@ export default function ManageRoom() {
       render: (text, room, index) => {
         return (
           <div className="flex flex-row justify-between items-center">
-            <BsFillTrashFill className="text-red-500 text-lg cursor-pointer" />
+            <Button
+              onClick={() => {
+                setIsModalVisible(true);
+              }}
+            >
+              <BsFillTrashFill className="text-red-500 text-lg cursor-pointer" />
+            </Button>
+            <Modal
+              title="Xóa Phòng"
+              visible={isModalVisible}
+              onOk={() => {
+                dispatch(xoaPhongAction(room._id));
+                setIsModalVisible(false);
+              }}
+              onCancel={() => {
+                setIsModalVisible(false);
+              }}
+            >
+              Bạn có chắc muốn xóa phòng này không?
+            </Modal>
             <AiFillEdit
               onClick={() => {
-                history.push("/addRoom");
+                history.push(`/editRoom/${room._id}`);
+                dispatch({
+                  type: EDIT_ROOM,
+                  payload: room,
+                });
               }}
               className="text-blue-500 text-lg cursor-pointer"
             />
@@ -103,6 +131,14 @@ export default function ManageRoom() {
   return (
     <div>
       <h3>Quản lý Phim</h3>
+      <button
+        onClick={() => {
+          history.push("/addRoom");
+        }}
+        className="text-md bg-red-500 p-2 rounded-md text-white"
+      >
+        Thêm Room
+      </button>
       <Search
         className="my-5"
         placeholder="input search text"
