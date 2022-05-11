@@ -65,7 +65,7 @@ export const dsNguoiDungPhanTrangReducer = (state = initialState, action) => {
       let searchResult = dsPhongPhanTrangUpdate.filter((item) => {
         console.log(item.name.trim().toUpperCase());
         return (
-          item.name.trim().toUpperCase() === userCanTim.trim().toUpperCase()
+          item.name?.trim().toUpperCase() === userCanTim.trim().toUpperCase()
         );
       });
       console.log(searchResult);

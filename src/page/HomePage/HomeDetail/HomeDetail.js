@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Card } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-const { Meta } = Card;
 import { layDSViTriAction } from "../../../redux/action/layDanhSachViTriAction";
 import { NavLink } from "react-router-dom";
 import "../../PageCss/Page.css";
-
+const { Meta } = Card;
 export default function HomeDetail() {
   const dispatch = useDispatch();
   useEffect(() => {

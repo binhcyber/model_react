@@ -56,9 +56,6 @@ export default function ListRoom() {
   };
   const handleWifi = () => {
     setWifi(!Wifi);
-    // const dsPhongUpdate = dsPhong?.filter((item) => {
-    //   return item.wifi === true;
-    // });
     dispatch({
       type: SET_WIFI,
       payload: Wifi,

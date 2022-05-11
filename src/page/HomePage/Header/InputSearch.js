@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { AutoComplete, Input } from "antd";
 import { EnvironmentOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 export default function InputSearch({ dsViTri }) {
   const cloneDsViTri = dsViTri.map((vitri) => {
     return { value: vitri.province, id: vitri._id };
   });
   const options = cloneDsViTri;
+  const history = useHistory();
   const searchResult = (value) =>
     dsViTri.map((vitri, index) => {
       const category = `${vitri.province}`;
@@ -19,6 +20,9 @@ export default function InputSearch({ dsViTri }) {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+            }}
+            onClick={() => {
+              history.push("/room");
             }}
           >
             <NavLink to="/room">{vitri.province} </NavLink>
@@ -56,7 +60,7 @@ export default function InputSearch({ dsViTri }) {
       onSelect={onSelect}
       onSearch={handleSearch}
     >
-      <Input.Search
+      <Input
         size="large"
         placeholder="Where are you going?"
         className="hover:border-transparent"

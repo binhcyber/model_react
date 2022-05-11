@@ -19,6 +19,7 @@ export default function ManageUser() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [searchUser, setSearchUser] = useState("");
   const { dsPhongPhanTrang } = useSelector((state) => {
     return state.dsNguoiDungPhanTrangReducer;
   });
@@ -67,9 +68,10 @@ export default function ManageUser() {
               </th>
 
               <td className="px-6 py-4">{user.email}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-4">{user.phone}</td>
+              {/* <td className="px-6 py-4">
                 {moment(user.birthday).format("DD/MM/YYYY")}
-              </td>
+              </td> */}
               <td className="px-6 py-4">
                 {user.type === "ADMIN" ? (
                   <span className="text-red-500 font-medium px-1 border-red-500 border-1">
@@ -114,10 +116,11 @@ export default function ManageUser() {
   return localStorageServ.userInfor.get() &&
     localStorageServ.userInfor.get().type === "ADMIN" ? (
     <div className="container mx-auto mt-12">
-      <div>
+      <h1 className="text-lg">Quản lý admin</h1>
+      <div className="my-4">
         <ModalThemUser />
       </div>
-      <form className="mb-5">
+      {/* <form className="mb-5">
         <label
           htmlFor="default-search"
           className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -132,23 +135,18 @@ export default function ManageUser() {
             className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Mockups, Logos..."
             required
-            onKeyUp={(e) => {
+            onChange={(e) => {
               let userSearch = e.target.value;
-              console.log(userSearch);
-              dispatch({
-                type: SEARCH_NGUOI_DUNG,
-                payload: userSearch,
-              });
+              setSearchUser(userSearch);
             }}
           />
           <button
             onClick={(e) => {
               e.preventDefault();
-              let userSearch = e.target.value;
-              console.log(userSearch);
+              console.log(searchUser);
               dispatch({
                 type: SEARCH_NGUOI_DUNG,
-                payload: userSearch,
+                payload: searchUser,
               });
             }}
             type="submit"
@@ -157,7 +155,7 @@ export default function ManageUser() {
             Search
           </button>
         </div>
-      </form>
+      </form> */}
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

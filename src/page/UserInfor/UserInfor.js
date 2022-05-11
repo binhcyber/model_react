@@ -7,6 +7,7 @@ export default function UserInfor() {
   const { dangNhap } = useSelector((state) => {
     return state.localStorageReducer;
   });
+  console.log(dangNhap);
   return (
     <div className="grid lg:grid-cols-2 md:grid-cols-2 grid-cols-1 container mx-auto mt-24 ">
       <div className="border-1 hover:shadow-lg p-3 w-80 rounded-lg">

@@ -5,7 +5,7 @@ import { layChiTietPhongAction } from "../../redux/action/layChiTietPhongAction"
 import { Modal, Button } from "antd";
 import { Select } from "antd";
 import { WifiOutlined, StarOutlined } from "@ant-design/icons";
-const { Option, OptGroup } = Select;
+
 import { Progress } from "antd";
 import UserComment from "./UserComment";
 import {
@@ -22,6 +22,7 @@ import { DatePicker, Space } from "antd";
 import moment from "moment";
 import { datPhongAction } from "../../redux/action/datPhongAction";
 import localStorageServ from "../../serviceWorker/locaStorage.service";
+const { Option, OptGroup } = Select;
 export default function DetailRoom() {
   const { chiTietPhong } = useSelector((state) => {
     return state.layChiTietPhongReducer;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Modal } from "antd";
+import { Table, Button, Modal, message } from "antd";
 import { Input, Space } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,7 +10,8 @@ import {
 import { AiFillEdit } from "react-icons/ai/index";
 import { BsFillTrashFill } from "react-icons/bs/index";
 import { useHistory } from "react-router-dom";
-import { EDIT_ROOM } from "../../redux/type/layDanhSachPhongType";
+import { EDIT_ROOM, SEARCH_ROOM } from "../../redux/type/layDanhSachPhongType";
+import localStorageServ from "../../serviceWorker/locaStorage.service";
 const { Search } = Input;
 
 export default function ManageRoom() {
@@ -160,11 +161,25 @@ export default function ManageRoom() {
     },
   ];
   const data = dsPhong;
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    console.log(value);
+    dispatch({
+      type: SEARCH_ROOM,
+      payload: value,
+    });
+  };
+  const handleSearch = (e) => {
+    const tenPhong = e.target.value;
+    dispatch({
+      type: SEARCH_ROOM,
+      payload: tenPhong,
+    });
+  };
   function onChange(pagination, filters, sorter, extra) {
     console.log("params", pagination, filters, sorter, extra);
   }
-  return (
+  return localStorageServ.userInfor.get() &&
+    localStorageServ.userInfor.get().type === "ADMIN" ? (
     <div>
       <h3>Quản lý Phim</h3>
       <button
@@ -179,9 +194,15 @@ export default function ManageRoom() {
         className="my-5"
         placeholder="input search text"
         onSearch={onSearch}
+        onKeyUp={handleSearch}
         enterButton
       />
       <Table columns={columns} dataSource={data} onChange={onChange} />
     </div>
+  ) : (
+    setTimeout(() => {
+      history.push("/login");
+      message.error("Sorry, Bạn không đủ quyền truy cập");
+    }, [500])
   );
 }

@@ -6,11 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { capNhatNguoiDungAction } from "../../redux/action/CRUDNguoiDungAction";
 import { useHistory } from "react-router-dom";
 import { capNhatPhongAction } from "../../redux/action/layDanhSachPhongAction";
-export default function editRoom() {
+export default function EditRoom() {
   const { editPhong } = useSelector((state) => {
     return state.layDSPhongReducer;
   });
-
   const [utilities, setUtilities] = useState({
     elevator: false,
     hotTub: false,
@@ -29,20 +28,6 @@ export default function editRoom() {
   useEffect(() => {
     let newUser = { ...editPhong };
     console.log(newUser);
-    // setUtilities({
-    //   ...utilities,
-    //   elevator: newUser.elevator,
-    //   hotTub: newUser.hotTub,
-    //   pool: newUser.pool,
-    //   hotTub: newUser.hotTub,
-    //   indoorFireplace: newUser.indoorFireplace,
-    //   dryer: newUser.dryer,
-    //   gym: newUser.gym,
-    //   kitchen: newUser.kitchen,
-    //   wifi: newUser.wifi,
-    //   heating: newUser.heating,
-    //   cableTV: newUser.cableTV,
-    // });
     form.setFieldsValue(newUser);
   }, []);
   const dispatch = useDispatch();

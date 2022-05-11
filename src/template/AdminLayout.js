@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { Layout, Menu, Icon } from "antd";
-const { Header, Sider, Content } = Layout;
 import "../page/PageCss/Page.css";
 import {
   BarsOutlined,
@@ -8,9 +6,10 @@ import {
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined,
 } from "@ant-design/icons";
-import { NavLink, useHistory } from "react-router-dom";
+import { Layout, Menu, Icon } from "antd";
+import { useHistory } from "react-router-dom";
+const { Header, Sider, Content } = Layout;
 export default function AdminLayout({ Component }) {
   const [collapsed, setCollapsed] = useState(false);
   const toggle = () => {
@@ -59,10 +58,6 @@ export default function AdminLayout({ Component }) {
             >
               Room
             </span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <UploadOutlined />
-            <span>nav 3</span>
           </Menu.Item>
         </Menu>
       </Sider>

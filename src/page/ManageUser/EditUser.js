@@ -9,10 +9,11 @@ export default function EditUser() {
   const { editUser } = useSelector((state) => {
     return state.dsNguoiDungPhanTrangReducer;
   });
+  console.log(editUser);
   const [form] = Form.useForm();
   useEffect(() => {
     let newUser = { ...editUser };
-    // setUser(newUser);
+    console.log(newUser);
     form.setFieldsValue(newUser);
   }, []);
   const dispatch = useDispatch();
@@ -26,12 +27,12 @@ export default function EditUser() {
   const onFinish = (values) => {
     console.log("Success:", values);
     const id = values._id;
-    const dayBirthday = moment(values.date).format("YYYY-MM-DD");
+    // const dayBirthday = moment(values.date).format("YYYY-MM-DD");
     const data = {
       ...values,
       type: "ADMIN",
       gender: true,
-      dayBirthday,
+      // dayBirthday,
     };
     console.log(data);
     dispatch(capNhatNguoiDungAction(id, data));
@@ -87,7 +88,7 @@ export default function EditUser() {
         >
           <Input />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           label="Date of birth"
           name="date"
           rules={[
@@ -96,7 +97,7 @@ export default function EditUser() {
           hasFeedback
         >
           <DatePicker picker="date" placeholder="Chose date of your birth" />
-        </Form.Item>
+        </Form.Item> */}
         <Form.Item
           label="email"
           name="email"

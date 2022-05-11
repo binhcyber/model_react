@@ -37,7 +37,7 @@ export default function Footer() {
             <ul className="text-gray-600 dark:text-gray-400">
               <li className="mb-4">
                 <NavLink to="/" className="hover:underline">
-                  Flowbite
+                 AirBnb
                 </NavLink>
               </li>
               <li>

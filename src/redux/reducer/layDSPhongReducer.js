@@ -2,7 +2,14 @@ import {
   CREATE_ROOM,
   DELETE_ROOM,
   EDIT_ROOM,
+  SEARCH_ROOM,
+  SET_DRYER,
+  SET_GYM,
+  SET_HOT_TUB,
+  SET_INDOOR_FIRE_PLACE,
+  SET_KITCHEN,
   SET_LIST_ROOM,
+  SET_POOL,
   SET_THANG_MAY,
   SET_WIFI,
   UPADTE_IMAGE_ROOM,
@@ -69,6 +76,21 @@ export const layDSPhongReducer = (state = initialState, action) => {
       state.dsPhong = newDsPhong;
       return { ...state };
     }
+    case SEARCH_ROOM: {
+      let searchResult = action.payload;
+      console.log(searchResult);
+      let cloneDsPhong = [...state.dsPhong];
+      console.log(cloneDsPhong);
+      let newDsPhong = cloneDsPhong.filter((item) => {
+        console.log(item.name);
+        return (
+          item.name?.trim().toUpperCase() === searchResult.trim().toUpperCase()
+        );
+      });
+      console.log(newDsPhong);
+      state.dsPhong = newDsPhong;
+      return { ...state };
+    }
     case SET_WIFI: {
       console.log(action.payload);
       let dsPhongUpdate = [...state.dsPhong];
@@ -85,7 +107,6 @@ export const layDSPhongReducer = (state = initialState, action) => {
         return { ...state };
       }
     }
-
     case SET_THANG_MAY: {
       console.log(action.payload);
       let dsPhongUpdate = [...state.dsPhong];
@@ -102,7 +123,102 @@ export const layDSPhongReducer = (state = initialState, action) => {
         return { ...state };
       }
     }
-
+    case SET_GYM: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.gym === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
+    case SET_DRYER: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.dryer === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
+    case SET_HOT_TUB: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.hotTub === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
+    case SET_KITCHEN: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.kitchen === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
+    case SET_POOL: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.pool === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
+    case SET_INDOOR_FIRE_PLACE: {
+      console.log(action.payload);
+      let dsPhongUpdate = [...state.dsPhong];
+      console.log(dsPhongUpdate);
+      if (!action.payload) {
+        state.dsPhongUtilities = dsPhongUpdate;
+        console.log(state.dsPhong);
+        return { ...state };
+      } else {
+        let newDsPhong = dsPhongUpdate.filter(
+          (item) => item.indoorFireplace === action.payload
+        );
+        state.dsPhongUtilities = newDsPhong;
+        return { ...state };
+      }
+    }
     default:
       return { ...state };
   }
