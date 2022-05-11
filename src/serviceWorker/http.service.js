@@ -60,17 +60,10 @@ class HttpRequestService {
     const uri = `/api/rooms/upload-image/${id}`;
     return AxiosServ.postMethod(uri, FormData);
   };
-  // layDanhSachPhim = () => {
-  //   const uri = "/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP01";
-
-  //   return AxiosServ.getMethod(uri);
-  // };
-
-  // layThongTinNguoiDung = (data) => {
-  //   const uri = "/api/QuanLyNguoiDung/ThongTinTaiKhoan";
-
-  //   return AxiosServ.postMethod(uri, data);
-  // };
+  capNhatAvatar = (FormData) => {
+    const uri = `api/users/upload-avatar`;
+    return AxiosServ.postMethod(uri, FormData);
+  };
 }
 
 const httpServ = new HttpRequestService();

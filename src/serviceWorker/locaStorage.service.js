@@ -3,6 +3,7 @@ class LocalStorageKey {
   ACCESS_TOKEN = "ACCESS_TOKEN";
   USER_INFOR = "USER_INFOR";
   ADMIN_INFOR = "ADMIN_INFOR";
+  AVATAR_USER = "AVATAR_USER";
 }
 class BaseStorage {
   key;
@@ -36,6 +37,7 @@ class LocalStorageService extends LocalStorageKey {
   accessToken = new BaseStorage(this.ACCESS_TOKEN);
   userInfor = new BaseStorage(this.USER_INFOR);
   adminInfor = new BaseStorage(this.ADMIN_INFOR);
+  avatarInfor = new BaseStorage(this.AVATAR_USER);
 }
 
 const localStorageServ = new LocalStorageService();

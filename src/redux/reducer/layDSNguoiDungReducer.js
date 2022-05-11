@@ -1,22 +1,25 @@
 import { SET_USER_PAGINATE } from "../type/layDSNguoiDungType";
 import {
   CAP_NHAT_NGUOI_DUNG,
+  CAP_NHAT_NGUOI_DUNG_AVATAR,
   EDIT_NGUOI_DUNG,
   SEARCH_NGUOI_DUNG,
   THEM_NGUOI_DUNG,
   XOA_NGUOI_DUNG,
 } from "../type/CRUDNguoiDungType";
+import localStorageServ from "../../serviceWorker/locaStorage.service";
 
 const initialState = {
   dsPhongPhanTrang: [],
   editUser: null,
+  updateUserAvatar: localStorageServ.avatarInfor.get(),
 };
 
 export const dsNguoiDungPhanTrangReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_PAGINATE: {
       console.log(action.payload);
-      state.dsPhongPhanTrang = action.payload;
+      state.dsPhongPhanTrang = action.payload.avatar;
       return { ...state };
     }
     case THEM_NGUOI_DUNG: {
@@ -70,6 +73,12 @@ export const dsNguoiDungPhanTrangReducer = (state = initialState, action) => {
       });
       console.log(searchResult);
       state.dsPhongPhanTrang = searchResult;
+      return { ...state };
+    }
+    case CAP_NHAT_NGUOI_DUNG_AVATAR: {
+      console.log(action.payload);
+      state.updateUserAvatar = action.payload.avatar;
+      localStorageServ.avatarInfor.set(action.payload.avatar);
       return { ...state };
     }
     default:

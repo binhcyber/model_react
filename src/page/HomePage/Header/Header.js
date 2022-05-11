@@ -18,6 +18,10 @@ export default function Header() {
   const { dangNhap, dangKy } = useSelector((state) => {
     return state.localStorageReducer;
   });
+  const { updateUserAvatar } = useSelector((state) => {
+    return state.dsNguoiDungPhanTrangReducer;
+  });
+  console.log(updateUserAvatar);
   // console.log({ dangKy });
   const handleRemoveLocal = () => {
     dispatch({
@@ -138,10 +142,11 @@ export default function Header() {
                   </svg>
                 </div>
                 <div className="block flex-grow-0 flex-shrink-0 h-10 w-12 pl-5">
-                  {dangNhap ? (
+                  {updateUserAvatar && dangNhap ? (
                     <img
-                      src="http://picsum.photos/50/50"
-                      className="rounded-full mt-1"
+                      src={updateUserAvatar}
+                      style={{ width: "50px", height: "31px" }}
+                      className="rounded-full mt-1 object-cover object-center"
                     />
                   ) : (
                     <svg

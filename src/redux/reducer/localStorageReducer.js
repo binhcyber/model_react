@@ -25,6 +25,7 @@ export const localStorageReducer = (state = initialState, action) => {
     case REMOVE_LOCAL: {
       state.dangNhap = null;
       localStorageServ.userInfor.remove();
+      localStorageServ.avatarInfor.remove();
       return { ...state };
     }
     default:
