@@ -72,6 +72,14 @@ class HttpRequestService {
     const uri = `/api/reviews?roomId=${id}`;
     return AxiosServ.postMethod(uri, data);
   };
+  xoaDanhGia = (id) => {
+    const uri = `/api/reviews/${id}`;
+    return AxiosServ.deleteMothod(uri);
+  };
+  capNhatDanhGia = (id, data) => {
+    const uri = `/api/reviews/${id}`;
+    return AxiosServ.putMethod(uri, data);
+  };
 }
 const httpServ = new HttpRequestService();
 

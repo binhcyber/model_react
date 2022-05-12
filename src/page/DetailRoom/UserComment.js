@@ -9,30 +9,36 @@ import {
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  capNhatDanhGiaAction,
   layDanhGiaAction,
   taoDanhGiaAction,
+  xoaDanhGiaAction,
 } from "../../redux/action/DanhGiaAction";
 import { Pagination } from "antd";
+import { EDIT_DANH_GIA } from "../../redux/type/DanhGiaType";
 export default function UserComment({ id }) {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(layDanhGiaAction(id));
   }, []);
-  const { danhGia } = useSelector((state) => {
+  const { danhGia, editDanhGia, disabled } = useSelector((state) => {
     return state.DanhGiaReducer;
   });
   const { dangNhap } = useSelector((state) => {
     return state.localStorageReducer;
   });
-  console.log(dangNhap);
   const { updateUserAvatar } = useSelector((state) => {
     return state.dsNguoiDungPhanTrangReducer;
   });
-  console.log(updateUserAvatar);
-  console.log(danhGia);
   const [comment, setComment] = useState({
     content: "",
   });
+  useEffect(() => {
+    let newEditDanhGia = editDanhGia?.content;
+    setComment({
+      content: newEditDanhGia,
+    });
+  }, [editDanhGia]);
   const handleChange = (e) => {
     let userComment = e.target.value;
     setComment({
@@ -41,9 +47,14 @@ export default function UserComment({ id }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(comment);
     const data = comment;
     dispatch(taoDanhGiaAction(id, data));
+    dispatch(capNhatDanhGiaAction(id, data));
+  };
+  const handleUpdate = () => {
+    const id = editDanhGia._id;
+    const data = comment;
+    dispatch(capNhatDanhGiaAction(id, data));
   };
   const newDangNhap = dangNhap?.name;
   const newDanhGia = danhGia?.map((item) => {
@@ -74,23 +85,6 @@ export default function UserComment({ id }) {
       maxValue: value * numEachPage,
     });
   };
-  const actions = [
-    <Tooltip key="comment-basic-like" title="Like">
-      <span onClick={like}>
-        {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
-        <span className="comment-action">{likes}</span>
-      </span>
-    </Tooltip>,
-    <Tooltip key="comment-basic-dislike" title="Dislike">
-      <span onClick={dislike}>
-        {React.createElement(
-          action === "disliked" ? DislikeFilled : DislikeOutlined
-        )}
-        <span className="comment-action">{dislikes}</span>
-      </span>
-    </Tooltip>,
-    <span key="comment-basic-reply-to">Reply to</span>,
-  ];
   const renderComment = () => {
     return (
       <>
@@ -101,7 +95,45 @@ export default function UserComment({ id }) {
             .map((item) => {
               return (
                 <Comment
-                  actions={actions}
+                  actions={[
+                    <Tooltip key="comment-basic-like" title="Like">
+                      <span onClick={like}>
+                        {createElement(
+                          action === "liked" ? LikeFilled : LikeOutlined
+                        )}
+                        <span className="comment-action">{likes}</span>
+                      </span>
+                    </Tooltip>,
+                    <Tooltip key="comment-basic-dislike" title="Dislike">
+                      <span onClick={dislike}>
+                        {React.createElement(
+                          action === "disliked"
+                            ? DislikeFilled
+                            : DislikeOutlined
+                        )}
+                        <span className="comment-action">{dislikes}</span>
+                      </span>
+                    </Tooltip>,
+                    <span
+                      onClick={() => {
+                        dispatch(xoaDanhGiaAction(item._id));
+                      }}
+                      key="comment-basic-reply-to"
+                    >
+                      Xóa
+                    </span>,
+                    <span
+                      onClick={() => {
+                        dispatch({
+                          type: EDIT_DANH_GIA,
+                          payload: item,
+                        });
+                      }}
+                      key="comment-basic-reply-to"
+                    >
+                      Edit
+                    </span>,
+                  ]}
                   author={<a>{item.newDangNhap}</a>}
                   avatar={<Avatar src={item.updateUserAvatar} alt="Han Solo" />}
                   content={<p>{item.content}</p>}
@@ -140,30 +172,42 @@ export default function UserComment({ id }) {
                 name="body"
                 placeholder="Type Your Comment"
                 required
+                value={comment.content}
               />
             </div>
             <div className="w-full md:w-full flex items-start md:w-full px-3">
               <div className="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
-                <svg
-                  fill="none"
-                  className="w-5 h-5 text-gray-600 mr-1"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+                {!disabled ? (
+                  <button
+                    className="bg-red-500 invisible border-1  p-2 rounded-md text-white hover:opacity-50 hover:border-transparent"
+                    onClick={handleUpdate}
+                  >
+                    Update
+                  </button>
+                ) : (
+                  <button
+                    className="bg-red-500 border-1  p-2 rounded-md text-white hover:opacity-50 hover:border-transparent"
+                    onClick={handleUpdate}
+                  >
+                    Update
+                  </button>
+                )}
               </div>
               <div className="-mr-1">
-                <input
-                  type="submit"
-                  className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
-                  defaultValue="Post Comment"
-                />
+                {disabled ? (
+                  <input
+                    disabled
+                    type="submit"
+                    className="bg-gray-400 invisible text-white p-2 rounded-md cursor-not-allowed"
+                    defaultValue="Post Comment"
+                  />
+                ) : (
+                  <input
+                    type="submit"
+                    className="bg-blue-400 text-white p-2 rounded-md cursor-pointer"
+                    defaultValue="Post Comment"
+                  />
+                )}
               </div>
             </div>
           </div>
