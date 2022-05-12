@@ -56,26 +56,14 @@ export default function DetailRoom() {
   }
 
   function handleCheckIn(value, checkIn) {
-    // console.log("CheckIn Time: ", value);
     console.log("CheckIn Selected Time: ", checkIn);
     setCheckInDate(checkIn);
     setAllowCheckIn(true);
   }
   function handleCheckOut(value, checkOut) {
-    // console.log("CheckOut Time: ", value);
     console.log("CheckOut Selected Time: ", checkOut);
     setCheckOutDate(checkOut);
     setAllowCheckOut(true);
-    // let day1 = new Date(checkInDate);
-    // let day2 = new Date(checkOutDate);
-    // console.log(day1);
-    // let difference = Math.abs(day2 - day1);
-    // console.log(typeof difference);
-    // let numDateStays = difference / (1000 * 3600 * 24);
-    // console.log(numDateStays);
-    // let tongTien = numDateStays * priceRoomday;
-    // setPriceRoom(tongTien);
-    // console.log(priceRoom);
   }
   const datPhong = () => {
     let day1 = new Date(checkInDate);
@@ -355,7 +343,7 @@ export default function DetailRoom() {
         </div>
       </div>
       <div>
-        <UserComment></UserComment>
+        <UserComment id={id} />
       </div>
     </div>
   );

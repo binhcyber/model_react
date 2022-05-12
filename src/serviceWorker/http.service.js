@@ -64,8 +64,15 @@ class HttpRequestService {
     const uri = `api/users/upload-avatar`;
     return AxiosServ.postMethod(uri, FormData);
   };
+  layDanhGia = (id) => {
+    const uri = `/api/reviews/byRoom?roomId=${id}`;
+    return AxiosServ.getMethod(uri);
+  };
+  taoDanhGia = (id, data) => {
+    const uri = `/api/reviews?roomId=${id}`;
+    return AxiosServ.postMethod(uri, data);
+  };
 }
-
 const httpServ = new HttpRequestService();
 
 export default httpServ;

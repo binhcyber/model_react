@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { DanhGiaReducer } from "./DanhGiaReducer";
 import { layChiTietPhongReducer } from "./layChiTietPhongReducer";
 import { dsNguoiDungPhanTrangReducer } from "./layDSNguoiDungReducer";
 import { layDSPhongReducer } from "./layDSPhongReducer";
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   localStorageReducer,
   LoadingReducer,
   dsNguoiDungPhanTrangReducer,
+  DanhGiaReducer,
 });

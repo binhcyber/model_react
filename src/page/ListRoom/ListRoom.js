@@ -36,19 +36,6 @@ export default function ListRoom() {
   }, []);
   const numEachPage = 20;
   const handleChange = (value) => {
-    // if (value <= 1) {
-    //   setPagination({
-    //     ...pagination,
-    //     minValue: 0,
-    //     maxValue: 10,
-    //   });
-    // } else {
-    //   setPagination({
-    //     ...pagination,
-    //     minValue: pagination.maxValue,
-    //     maxValue: value * 10,
-    //   });
-    // }
     setPagination({
       minValue: (value - 1) * numEachPage,
       maxValue: value * numEachPage,
