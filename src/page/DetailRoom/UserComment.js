@@ -1,12 +1,6 @@
 import React, { createElement, useEffect, useState } from "react";
 import { Comment, Tooltip, Avatar } from "antd";
 import moment from "moment";
-import {
-  DislikeOutlined,
-  LikeOutlined,
-  DislikeFilled,
-  LikeFilled,
-} from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
   capNhatDanhGiaAction,
@@ -16,6 +10,8 @@ import {
 } from "../../redux/action/DanhGiaAction";
 import { Pagination } from "antd";
 import { EDIT_DANH_GIA } from "../../redux/type/DanhGiaType";
+import * as Yup from "yup";
+import { Formik, Form, Field } from "formik";
 export default function UserComment({ id }) {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -48,32 +44,39 @@ export default function UserComment({ id }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const data = comment;
-    dispatch(taoDanhGiaAction(id, data));
-    dispatch(capNhatDanhGiaAction(id, data));
+    if (data.content === undefined || data.content.trim() === "") {
+      setComment({
+        ...comment,
+        error: "Please fill in the text area",
+      });
+    } else {
+      dispatch(taoDanhGiaAction(id, data));
+      setComment({
+        content: "",
+      });
+    }
   };
+
   const handleUpdate = () => {
     const id = editDanhGia._id;
     const data = comment;
-    dispatch(capNhatDanhGiaAction(id, data));
+    console.log(data);
+    if (data.content.trim() === "" || data.content === undefined) {
+      setComment({
+        ...comment,
+        error: "Please fill in the text area",
+      });
+    } else {
+      dispatch(capNhatDanhGiaAction(id, data));
+    }
   };
+  console.log(comment.error);
   const newDangNhap = dangNhap?.name;
   const newDanhGia = danhGia?.map((item) => {
     return { ...item, newDangNhap, updateUserAvatar };
   });
   console.log(newDanhGia);
-  const [likes, setLikes] = useState(0);
-  const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
-  const like = () => {
-    setLikes(1);
-    setDislikes(0);
-    setAction("liked");
-  };
-  const dislike = () => {
-    setLikes(0);
-    setDislikes(1);
-    setAction("disliked");
-  };
   const numEachPage = 4;
   const [pagination, setPagination] = useState({
     minValue: 0,
@@ -96,24 +99,6 @@ export default function UserComment({ id }) {
               return (
                 <Comment
                   actions={[
-                    <Tooltip key="comment-basic-like" title="Like">
-                      <span onClick={like}>
-                        {createElement(
-                          action === "liked" ? LikeFilled : LikeOutlined
-                        )}
-                        <span className="comment-action">{likes}</span>
-                      </span>
-                    </Tooltip>,
-                    <Tooltip key="comment-basic-dislike" title="Dislike">
-                      <span onClick={dislike}>
-                        {React.createElement(
-                          action === "disliked"
-                            ? DislikeFilled
-                            : DislikeOutlined
-                        )}
-                        <span className="comment-action">{dislikes}</span>
-                      </span>
-                    </Tooltip>,
                     <span
                       onClick={() => {
                         dispatch(xoaDanhGiaAction(item._id));
@@ -171,9 +156,9 @@ export default function UserComment({ id }) {
                 className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
                 name="body"
                 placeholder="Type Your Comment"
-                required
                 value={comment.content}
               />
+              <p className="text-red-500">{comment.error}</p>
             </div>
             <div className="w-full md:w-full flex items-start md:w-full px-3">
               <div className="flex items-start w-1/2 text-gray-700 px-2 mr-auto">
